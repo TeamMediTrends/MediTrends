@@ -1,3 +1,6 @@
+## Quotes:
+### Blake's: "With gratitude, optimism is sustainable." Michael J. Fox
+
 # MediTrends - Senior Project Proposal
 
 ## 1. Project Name
