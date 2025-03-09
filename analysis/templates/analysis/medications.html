@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Medication List</title>
-</head>
-<body>
-    <h1>Medication List</h1>
-    <ul>
-        {% for med in meds %}
-            <li>{{ med.name }} - {{ med.dosage }}mg (Last filled: {{ med.last_filled }})</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Medications List{% endblock %}
+
+{% block content %}
+<h2>Medications</h2>
+<ul>
+    {% for med in meds %}
+    <li>{{ med.name }} - {{ med.dosage }}mg (Last filled: {{ med.last_filled }})</li>
+    {% endfor %}
+</ul>
+{% endblock %}

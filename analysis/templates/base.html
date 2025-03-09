@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <title>{% block title %}MediTrends{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/navbar.js' %}"></script>
+</head>
+
+<body>
+    {% include 'includes/header.html' %}
+    {% include 'includes/navbar.html' %}
+
+    <main>
+        {% block content %}{% endblock %} {# Placeholder for page content #}
+    </main>
+
+    {% include 'includes/footer.html' %}
+</body>
+
+</html>

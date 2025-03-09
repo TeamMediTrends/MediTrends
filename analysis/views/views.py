@@ -1,13 +1,14 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from ..models import Medication
 
-# def med_list(request):
-#     meds = Medication.objects.all()  # Get all meds from the database
-#     return render(request, 'analysis/medications.html', {'meds': meds})
+class HomeView(TemplateView):
+    template_name = 'analysis/home.html'
+    context_object_name = 'home'
 
-class MedicationListView(ListView):
+class MedicationListView(LoginRequiredMixin, ListView):
     model = Medication
     template_name = 'analysis/medications.html'
     context_object_name = 'meds'
