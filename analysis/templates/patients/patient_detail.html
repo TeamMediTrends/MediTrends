@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Patient Details</h2>
+<p><strong>Name:</strong> {{ patient.first_name }} {{ patient.last_name }}</p>
+<p><strong>Date of Birth:</strong> {{ patient.dob }}</p>
+<p><strong>State:</strong> {{ patient.state }}</p>
+<p><strong>Sex:</strong> {{ patient.get_sex_display }}</p>
+<p><strong>Ethnicity:</strong> {{ patient.ethnicity }}</p>
+<p><strong>Insurance Status:</strong> {{ patient.insurance_status }}</p>
+<p><strong>Education Level:</strong> {{ patient.education_level }}</p>
+<p><strong>Pre-existing Conditions:</strong> {% if patient.pre_existing_conditions %} Yes {% else %} No {% endif %}</p>
+
+<a href="{% url 'patient_tests' patient.id %}">View Test Results</a>
+{% endblock %}

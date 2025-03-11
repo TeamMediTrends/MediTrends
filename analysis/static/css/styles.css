@@ -45,20 +45,6 @@ nav {
     align-items: center;
 }
 
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 12px;
-    transition: background 0.5s;
-    font-size: 20px;
-}
-
-.nav-links a:hover {
-    background-color: #82dddf;
-    color: black;
-    border-radius: 5px;
-}
-
 /* Hamburger menu button */
 .menu-toggle {
     background: none;
@@ -77,15 +63,34 @@ nav {
     border-radius: 5px;
 }
 
-#log-links a{
+#log-links a,
+.nav-links a {
     color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 8px 12px;
+    transition: background 0.5s;
+    border: 2px solid;
+    border-color: gray black black gray;
+}
+
+#log-links a:hover,
+.nav-links a:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+}
+
+.logout-btn{
+    color: white;
+    background-color: #004450;
     text-decoration: none;
     font-size: 20px;
     padding: 8px 12px;
     transition: background 0.5s;
 }
 
-#log-links a:hover {
+.logout-btn:hover {
     background-color: #82dddf;
     color: black;
     border-radius: 5px;

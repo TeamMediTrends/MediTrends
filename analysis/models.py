@@ -38,6 +38,9 @@ class TestType(models.Model):
     """ Stores different types of medical tests. """
     name = models.CharField(max_length=100, unique=True)
 
+    def __str__(self):
+        return self.name
+
 class PatientTest(models.Model):
     """ Stores test results for a specific patient. """
     patient = models.ForeignKey('Patient', on_delete=models.CASCADE)

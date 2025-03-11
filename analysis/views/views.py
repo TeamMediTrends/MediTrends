@@ -1,10 +1,11 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
-from django.views.generic import ListView, TemplateView, FormView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from ..mixins import AdminRequiredMixin
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import ListView, TemplateView, FormView, CreateView, DetailView
 from django.urls import reverse_lazy
 import pandas as pd
-from ..forms import UploadFileForm, TestTypeForm
-from ..models import Patient, Medication, TestType
+from ..forms import UploadFileForm, TestTypeForm, TestFilterForm
+from ..models import Patient, Medication, TestType, PatientTest
 
 
 class HomeView(TemplateView):
@@ -19,9 +20,9 @@ class MedicationListView(LoginRequiredMixin, ListView):
     context_object_name = "meds"
 
 
-class UploadPatientsView(LoginRequiredMixin, FormView):
+class UploadPatientsView(LoginRequiredMixin, AdminRequiredMixin, FormView):
     """Handles patient data upload via Excel file"""
-    template_name = "analysis/upload.html"
+    template_name = "patients/upload.html"
     form_class = UploadFileForm
     success_url = reverse_lazy("home")
 
@@ -77,9 +78,52 @@ class TestTypeListView(LoginRequiredMixin, ListView):
     template_name = "test_types/test_type_list.html"
     context_object_name = "test_types"
 
-class AddTestTypeView(LoginRequiredMixin, CreateView):
+class AddTestTypeView(LoginRequiredMixin, AdminRequiredMixin, CreateView):
     """Allows users to add a new test type."""
     model = TestType
     form_class = TestTypeForm
     template_name = "test_types/add_test_type.html"
     success_url = reverse_lazy("test_type_list")
+
+class PatientListView(LoginRequiredMixin, AdminRequiredMixin, ListView):
+    """Displays a list of all patients."""
+    model = Patient
+    template_name = "patients/patient_list.html"
+    context_object_name = "patients"
+
+class PatientDetailView(LoginRequiredMixin, AdminRequiredMixin, DetailView):
+    """Displays detailed information about a specific patient."""
+    model = Patient
+    template_name = "patients/patient_detail.html"
+    context_object_name = "patient"
+
+class PatientTestListView(LoginRequiredMixin, AdminRequiredMixin, ListView):
+    """Displays and filters test results for a patient."""
+    template_name = "patients/patient_tests.html"
+    context_object_name = "tests"
+
+    def get_queryset(self):
+        patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
+        tests = PatientTest.objects.filter(patient=patient)
+
+        # Get filter parameters
+        test_type = self.request.GET.get("test_type")
+        start_date = self.request.GET.get("start_date")
+        end_date = self.request.GET.get("end_date")
+
+        # Apply filters
+        if test_type:
+            tests = tests.filter(test_type_id=test_type)
+        if start_date:
+            tests = tests.filter(date_taken__gte=start_date)
+        if end_date:
+            tests = tests.filter(date_taken__lte=end_date)
+
+        return tests
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        patient = get_object_or_404(Patient, pk=self.kwargs['pk'])
+        context["patient"] = patient
+        context["form"] = TestFilterForm(self.request.GET)
+        return context

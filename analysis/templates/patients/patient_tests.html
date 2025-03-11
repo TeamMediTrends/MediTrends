@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Test Results for {{ patient.first_name }} {{ patient.last_name }}</h2>
+
+<!-- Filter Form -->
+<form method="get">
+    {{ form.as_p }}
+    <button type="submit">Filter</button>
+</form>
+
+<!-- Test Results Table -->
+<table border="1">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Test Type</th>
+            <th>Result</th>
+            <th>Unit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for test in tests %}
+        <tr>
+            <td>{{ test.date_taken }}</td>
+            <td>{{ test.test_type.name }}</td>
+            <td>{{ test.result }}</td>
+            <td>{{ test.unit }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No test results found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
