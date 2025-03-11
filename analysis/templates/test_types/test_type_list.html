@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Test Types</h2>
+<ul>
+    {% for test in test_types %}
+        <li>{{ test.name }}</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_test_type' %}">Add New Test Type</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Add New Test Type</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Test Type</button>
+</form>
+<a href="{% url 'test_type_list' %}">Back to Test Types</a>
+{% endblock %}
