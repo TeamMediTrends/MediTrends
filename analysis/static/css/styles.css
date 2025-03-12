@@ -9,7 +9,8 @@ body {
     background-color: #c8c8c841;
 }
 
-/* General navbar styling */
+/*********** Navbar styling ***********/
+
 nav {
     background-color: #004450;
     color: white;
@@ -96,7 +97,333 @@ nav {
     border-radius: 5px;
 }
 
-/* Responsive design for mobile screens */
+/********** Login/Logout Page Styling *********/
+
+.log-page {
+    background-color: white;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.log-page h2 {
+    color: #004450;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.log-page p {
+    color: red;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.log-page form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.log-page label {
+    text-align: left;
+    font-size: 20px;
+    color: #004450;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.log-page input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid #2e8998;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+.log-page input:focus {
+    border-color: #82dddf;
+    box-shadow: 0px 0px 5px #82dddf;
+}
+
+.log-page button {
+    background-color: #004450;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid;
+    border-color: gray black black gray;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.log-page .login-again {
+    display: inline-block;
+    background-color: #004450;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid;
+    border-color: gray black black gray;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.log-page .login-again:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+.log-page button:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+/********** Patient List Page Styling *********/
+
+.patient-list-container {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.patient-list-container h2 {
+    color: #004450;
+    font-size: 38px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e8998;
+    padding-bottom: 10px;
+}
+
+.patient-list {
+    list-style: none;
+    padding: 0;
+}
+
+.patient-list li {
+    margin: 10px 0;
+    padding: 12px;
+    width: 350px;
+    background-color: #004450;
+    border: 2px solid;
+    border-color: gray black black gray;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.patient-list li a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: block; 
+    padding: 12px; 
+    border-radius: 5px; 
+}
+
+.patient-list li:hover {
+    background-color: #82dddf;
+    border-radius: 5px;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+.patient-list li:hover a {
+    color: black; 
+}
+
+/********** Patient Detail Page Styling *********/
+
+.patient-detail-container {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 20px;
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.patient-detail-container h2 {
+    color: #004450;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e8998;
+    padding-bottom: 10px;
+}
+
+.patient-info p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #004450;
+}
+
+.view-tests-btn {
+    display: block;
+    text-align: center;
+    background-color: #004450;
+    color: white;
+    width: 350px;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid;
+    border-color: gray black black gray;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    transition: background 0.3s;
+    border-radius: 5px;
+}
+
+.view-tests-btn:hover {
+    background-color: #82dddf;
+    color: black;
+    transform: scale(1.05);
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+/********** Test Results Page Styling **********/
+
+.test-results-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.test-results-container h2 {
+    color: #004450;
+    font-size: 32px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e8998;
+    padding-bottom: 10px;
+}
+
+.filter-form {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #004450;
+}
+
+.form-group select,
+.form-group input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #c8c8c8;
+    border-radius: 5px;
+    width: 180px;
+    text-align: center;
+}
+
+.filter-btn-container {
+    margin-top: 22px;
+}
+
+.filter-btn {
+    background-color: #004450;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border: 2px solid;
+    border-color: gray black black gray;
+}
+
+.filter-btn:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #c8c8c8;
+    transform: scale(1.05);
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.test-results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.test-results-table th, .test-results-table td {
+    border: 1px solid #c8c8c8;
+    padding: 12px;
+    text-align: center;
+}
+
+.test-results-table th {
+    background-color: #004450;
+    color: white;
+    font-size: 18px;
+}
+
+.test-results-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+/********** Responsive design for mobile screens **********/
+
 @media screen and (max-width: 768px) {
     .menu-toggle {
         display: flex;
@@ -119,5 +446,34 @@ nav {
     .nav-links li {
         text-align: center;
         padding: 10px;
+    }
+
+    .patient-list-container {
+        max-width: 90%;
+    }
+
+    .patient-list li {
+        width: 200px;
+    }
+
+    .view-tests-btn {
+        width: 200px;
+    }
+
+    .test-results-container {
+        max-width: 90%;
+    }
+
+    .test-results-table th, .test-results-table td {
+        padding: 8px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group select,
+    .form-group input {
+        width: 100%;
     }
 }

@@ -1,36 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Test Results for {{ patient.first_name }} {{ patient.last_name }}</h2>
+<div class="test-results-container">
+    <h2>Test Results for {{ patient.first_name }} {{ patient.last_name }}</h2>
 
-<!-- Filter Form -->
-<form method="get">
-    {{ form.as_p }}
-    <button type="submit">Filter</button>
-</form>
+    <!-- Filter Form -->
+    <form method="get" class="filter-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="id_test_type">Test Type:</label>
+                {{ form.test_type }}
+            </div>
+            <div class="form-group">
+                <label for="id_start_date">Start Date:</label>
+                {{ form.start_date }}
+            </div>
+            <div class="form-group">
+                <label for="id_end_date">End Date:</label>
+                {{ form.end_date }}
+            </div>
+            <div class="form-group filter-btn-container">
+                <button type="submit" class="filter-btn">Filter</button>
+            </div>
+        </div>
+    </form>
 
-<!-- Test Results Table -->
-<table border="1">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Test Type</th>
-            <th>Result</th>
-            <th>Unit</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for test in tests %}
-        <tr>
-            <td>{{ test.date_taken }}</td>
-            <td>{{ test.test_type.name }}</td>
-            <td>{{ test.result }}</td>
-            <td>{{ test.unit }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="4">No test results found.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <!-- Test Results Table -->
+    <div class="table-container">
+        <table class="test-results-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Test Type</th>
+                    <th>Result</th>
+                    <th>Unit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for test in tests %}
+                <tr>
+                    <td>{{ test.date_taken }}</td>
+                    <td>{{ test.test_type.name }}</td>
+                    <td>{{ test.result }}</td>
+                    <td>{{ test.unit }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No test results found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

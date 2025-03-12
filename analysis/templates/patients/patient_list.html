@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Patient List</h2>
-<ul>
-    {% for patient in patients %}
-        <li>
-            <a href="{% url 'patient_detail' patient.id %}">
-                {{ patient.first_name }} {{ patient.last_name }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+<div class="patient-list-container">
+    <h2>Patient List</h2>
+    <ul class="patient-list">
+        {% for patient in patients %}
+            <li>
+                <a href="{% url 'patient_detail' patient.id %}">
+                    {{ patient.first_name }} {{ patient.last_name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

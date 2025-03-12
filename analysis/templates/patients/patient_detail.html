@@ -1,14 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Patient Details</h2>
-<p><strong>Name:</strong> {{ patient.first_name }} {{ patient.last_name }}</p>
-<p><strong>Date of Birth:</strong> {{ patient.dob }}</p>
-<p><strong>State:</strong> {{ patient.state }}</p>
-<p><strong>Sex:</strong> {{ patient.get_sex_display }}</p>
-<p><strong>Ethnicity:</strong> {{ patient.ethnicity }}</p>
-<p><strong>Insurance Status:</strong> {{ patient.insurance_status }}</p>
-<p><strong>Education Level:</strong> {{ patient.education_level }}</p>
-<p><strong>Pre-existing Conditions:</strong> {% if patient.pre_existing_conditions %} Yes {% else %} No {% endif %}</p>
+<div class="patient-detail-container">
+    <h2>Patient Details</h2>
+    <div class="patient-info">
+        <p><strong>Name:</strong> {{ patient.first_name }} {{ patient.last_name }}</p>
+        <p><strong>Date of Birth:</strong> {{ patient.dob }}</p>
+        <p><strong>State:</strong> {{ patient.state }}</p>
+        <p><strong>Sex:</strong> {{ patient.get_sex_display }}</p>
+        <p><strong>Ethnicity:</strong> {{ patient.ethnicity|default:"N/A" }}</p>
+        <p><strong>Insurance Status:</strong> {{ patient.insurance_status|default:"N/A" }}</p>
+        <p><strong>Education Level:</strong> {{ patient.education_level|default:"N/A" }}</p>
+        <p><strong>Pre-existing Conditions:</strong> {% if patient.pre_existing_conditions %} Yes {% else %} No {% endif %}</p>
+        <p><strong>Income:</strong> ${{ patient.income|default:"N/A" }}</p>
+        <p><strong>Marital Status:</strong> {{ patient.marital_status|default:"N/A" }}</p>
+        <p><strong>Dependents:</strong> {{ patient.dependents|default:"0" }}</p>
+        <p><strong>Disabled Mentally:</strong> {% if patient.disabled_mentally %} Yes {% else %} No {% endif %}</p>
+        <p><strong>Disabled Physically:</strong> {% if patient.disabled_physically %} Yes {% else %} No {% endif %}</p>
+        <p><strong>Religious:</strong> {% if patient.religious %} Yes {% else %} No {% endif %}</p>
+        <p><strong>Smoking:</strong> {% if patient.smoking %} Yes {% else %} No {% endif %}</p>
+        <p><strong>Alcohol:</strong> {% if patient.alcohol %} Yes {% else %} No {% endif %}</p>
+        <p><strong>Drugs:</strong> {% if patient.drugs %} Yes {% else %} No {% endif %}</p>
+        <p><strong>Overweight:</strong> {% if patient.overweight %} Yes {% else %} No {% endif %}</p>
+    </div>
 
-<a href="{% url 'patient_tests' patient.id %}">View Test Results</a>
+    <a href="{% url 'patient_tests' patient.id %}" class="view-tests-btn">View Test Results</a>
+</div>
 {% endblock %}
