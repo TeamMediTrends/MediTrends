@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Insights</h1>
+
+<a href="{% url 'insight_reports' %}" class="btn">View Reports</a>
+<a href="{% url 'insight_findings' %}" class="btn">View Findings</a>
+{% endblock %}

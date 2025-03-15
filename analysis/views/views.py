@@ -5,19 +5,13 @@ from django.views.generic import ListView, TemplateView, FormView, CreateView, D
 from django.urls import reverse_lazy
 import pandas as pd
 from ..forms import UploadFileForm, TestTypeForm, TestFilterForm
-from ..models import Patient, Medication, TestType, PatientTest
+from ..models import Patient, TestType, PatientTest
 
 
 class HomeView(TemplateView):
     """Home page view"""
     template_name = "analysis/home.html"
-
-
-class MedicationListView(LoginRequiredMixin, ListView):
-    """List of medications"""
-    model = Medication
-    template_name = "analysis/medications.html"
-    context_object_name = "meds"
+    content_object_name = "home"
 
 
 class UploadPatientsView(LoginRequiredMixin, AdminRequiredMixin, FormView):
@@ -127,3 +121,24 @@ class PatientTestListView(LoginRequiredMixin, AdminRequiredMixin, ListView):
         context["patient"] = patient
         context["form"] = TestFilterForm(self.request.GET)
         return context
+    
+
+class InsightFindingsView(LoginRequiredMixin, TemplateView):
+    """Displays the findings page."""
+    template_name = "analysis/insights/findings.html"
+    context_object_name = "insight_findings"
+
+class InsightReportsView(LoginRequiredMixin, TemplateView):
+    """Displays the reports page."""
+    template_name = "analysis/insights/reports.html"
+    context_object_name = "insight_reports"
+
+class ReportCreatorView(LoginRequiredMixin, TemplateView):
+    """Displays the report creator page."""
+    template_name = "analysis/report_creator.html"
+    context_object_name = "report_creator"
+
+class InsightsView(LoginRequiredMixin, TemplateView):
+    """Displays the insights page."""
+    template_name = "analysis/insights/insights.html"
+    context_object_name = "insights"

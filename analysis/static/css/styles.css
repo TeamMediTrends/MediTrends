@@ -6,7 +6,10 @@ accent color (gray): #c8c8c8
 */
 
 body {
-    background-color: #c8c8c841;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
 }
 
 /*********** Navbar styling ***********/
@@ -195,6 +198,148 @@ nav {
     box-shadow: 5px 5px 5px #c8c8c8;
 }
 
+/********** Home Page Styling *********/
+
+.welcome-content {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffffff, #f2f2f2);
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    list-style: none;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.welcome-content h1 {
+    font-size: 42px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #004450, #2e8998);
+    color: white;
+    padding: 15px;
+    background: #004450;
+    display: inline-block;
+    border-radius: 8px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    animation: fadeInSlide 1s ease-in-out;
+}
+
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.welcome-content h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #004450;
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    animation: fadeInScale 1s ease-in-out;
+}
+
+.welcome-content img {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    margin: 20px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.welcome-content p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #00323d;
+    text-align: center;
+    line-height: 1.6;
+    margin: 15px 20px;
+    padding: 10px;
+    max-width: 700px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.welcome-content li {
+    margin: 10px 0;
+    padding: 12px;
+    width: 350px;
+    background-color: #004450;
+    border: 2px solid;
+    border-color: gray black black gray;
+    transition: background 0.3s ease-in-out, transform 0.2s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.welcome-content a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    padding: 12px;
+    border-radius: 5px;
+    transition: color 0.3s ease-in-out;
+}
+
+.welcome-content li:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+    transform: scale(1.05);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-content li:hover a {
+    color: black;
+}
+
 /********** Patient List Page Styling *********/
 
 .patient-list-container {
@@ -209,6 +354,16 @@ nav {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .patient-list-container h2 {
@@ -269,6 +424,14 @@ nav {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: left;
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .patient-detail-container h2 {
@@ -322,6 +485,14 @@ nav {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .test-results-container h2 {
@@ -446,6 +617,24 @@ nav {
     .nav-links li {
         text-align: center;
         padding: 10px;
+    }
+
+    .welcome-content {
+        width: 90%;
+        padding: 15px;
+    }
+    
+    .welcome-content img {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .welcome-content h1 {
+        font-size: 32px;
+    }
+    
+    .welcome-content p {
+        font-size: 16px;
     }
 
     .patient-list-container {

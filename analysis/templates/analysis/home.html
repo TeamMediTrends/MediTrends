@@ -1,8 +1,37 @@
 {% extends "base.html" %}
 
-{% block title %}Medications List{% endblock %}
-
 {% block content %}
-<h2>Home Page</h2>
+{% load static %}
+<div class="welcome-content" id="welcome-content">
+    <h1>Welcome to MediTrends</h1>
+    <h2>Turn complex data into actionable knowledge!</h2>
+    <img src="{% static 'images/hero-image.png' %}" alt="Logo" />
 
+    {% if user.is_authenticated %}
+    {% if user.is_staff %}
+    <!-- Admin User Welcome Message -->
+    <p>
+        As an admin, you have full access to patient records, trend analysis, and detailed visual reports.
+        Use our tools to process vast datasets, identify key health patterns, and generate insights that drive medical
+        advancements.
+    </p>
+    {% else %}
+    <!-- Regular User Welcome Message -->
+    <p>
+        Your tool for uncovering medical insights. Our platform helps researchers analyze vast amounts of patient data,
+        identify trends, and visualize patterns across different age groups. With interactive charts and statistical
+        models,
+        you can explore health data like never before.
+    </p>
+    {% endif %}
+    <li><a href="{% url 'insights' %}"> Let's get started! </a></li>
+    {% else %}
+    <!-- Guest Welcome Message -->
+    <p>
+        Unlock medical insights with cutting-edge data analysis. Sign in to explore trends, visualize complex datasets,
+        and drive advancements in healthcare research.
+    </p>
+    <li><a href="{% url 'login' %}">Login</a></li>
+    {% endif %}
+</div>
 {% endblock %}
