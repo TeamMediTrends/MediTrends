@@ -1,5 +1,5 @@
 from django.urls import path
-from .views.views import HomeView, UploadPatientsView, TestTypeListView, AddTestTypeView, PatientListView, PatientDetailView, PatientTestListView, InsightFindingsView, ReportCreatorView, InsightReportsView, InsightsView
+from .views.views import HomeView, UploadPatientsView, TestTypeListView, AddTestTypeView, PatientListView, PatientDetailView, PatientTestListView, ReportCreatorView, InsightsView, LongitudinalTrendsView, PopulationTestDistributionView, TestCorrelationView, PatientClusteringView, DemographicImpactView, TestAnomaliesView, TestAnomaliesView, SeasonalVariationsView, TestForecastingView, LifestyleImpactView, PreexistingConditionsView 
 from django.contrib.auth.views import LogoutView
 from django.shortcuts import render
 
@@ -18,7 +18,15 @@ urlpatterns = [
     path("logout/", logout_page, name="logout_page"),
     path("accounts/logout/", LogoutView.as_view(), name="logout"),
     path("insights/", InsightsView.as_view(), name="insights"),
-    path("insight-findings/", InsightFindingsView.as_view(), name="insight_findings"),
-    path("insight-reports/", InsightReportsView.as_view(), name="insight_reports"),
+    path("longitudinal-trends/", LongitudinalTrendsView.as_view(), name="longitudinal_trends"),
+    path("population-test-distribution/", PopulationTestDistributionView.as_view(), name="population_test_distribution"),
+    path("test-correlation/", TestCorrelationView.as_view(), name="test_correlation"),
+    path("patient-clustering/", PatientClusteringView.as_view(), name="patient_clustering"),
+    path("demographic-impact/", DemographicImpactView.as_view(), name="demographic_impact"),
+    path("test-anomalies/", TestAnomaliesView.as_view(), name="test_anomalies"),
+    path("seasonal-variations/", SeasonalVariationsView.as_view(), name="seasonal_variations"),
+    path("test-forecasting/", TestForecastingView.as_view(), name="test_forecasting"),
+    path("lifestyle-impact/", LifestyleImpactView.as_view(), name="lifestyle_impact"),
+    path("preexisting-conditions/", PreexistingConditionsView.as_view(), name="preexisting_conditions"),
     path("report-creator/", ReportCreatorView.as_view(), name="report_creator"),
 ]

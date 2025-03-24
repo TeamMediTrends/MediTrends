@@ -1,8 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Insights</h1>
 
-<a href="{% url 'insight_reports' %}" class="btn">View Reports</a>
-<a href="{% url 'insight_findings' %}" class="btn">View Findings</a>
+<div class="insight-buttons">
+    <h1>Insights</h1>
+    <li>
+    <a href="{% url 'longitudinal_trends' %}">Longitudinal Trends Analysis in Test Results</a>
+    </li>
+    <li>
+    <a href="{% url 'population_test_distribution' %}">Population-Level Test Distribution Analysis</a>
+    </li>
+    <li>
+    <a href="{% url 'test_correlation' %}">Correlation Analysis Between Test Markers</a>
+    </li>
+    <li>
+    <a href="{% url 'patient_clustering' %}">Patient Grouping Based on Test Patterns</a>
+    </li>
+    <li>
+    <a href="{% url 'demographic_impact' %}">Impact of Demographics on Test Results</a>
+    </li>
+    <li>
+    <a href="{% url 'test_anomalies' %}">Test Result Anomalies and Outliers</a>
+    </li>
+    <li>
+    <a href="{% url 'seasonal_variations' %}">Seasonal Variations in Test Results</a>
+    </li>
+    <li>
+    <a href="{% url 'test_forecasting' %}">Predicting Future Test Values</a>
+    </li>
+    <li>
+    <a href="{% url 'lifestyle_impact' %}">Relationships Between Lifestyle Factors and Test Results</a>
+    </li>
+    <li>
+    <a href="{% url 'preexisting_conditions' %}">Test Result Progression for Patients with Pre-existing Conditions</a>
+    </li>    
+</div>
+
 {% endblock %}
