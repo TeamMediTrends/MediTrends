@@ -718,6 +718,14 @@ nav {
         width: 200px;
     }
 
+    .insight-buttons {
+        max-width: 90%;
+    }
+
+    .insight-buttons li {
+        width: 200px;
+    }
+
     .view-tests-btn {
         width: 200px;
     }

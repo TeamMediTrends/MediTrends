@@ -1,5 +1,6 @@
 from django.urls import path
-from .views.views import HomeView, UploadPatientsView, TestTypeListView, AddTestTypeView, PatientListView, PatientDetailView, PatientTestListView, ReportCreatorView, InsightsView, LongitudinalTrendsView, PopulationTestDistributionView, TestCorrelationView, PatientClusteringView, DemographicImpactView, TestAnomaliesView, TestAnomaliesView, SeasonalVariationsView, TestForecastingView, LifestyleImpactView, PreexistingConditionsView 
+from .views.views import HomeView, UploadPatientsView, TestTypeListView, AddTestTypeView, PatientListView, PatientDetailView, PatientTestListView, ReportCreatorView
+from .views.insights.views import InsightsView, LongitudinalTrendsView, PopulationTestDistributionView, TestCorrelationView, PatientClusteringView, DemographicImpactView, TestAnomaliesView, SeasonalVariationsView, TestForecastingView, LifestyleImpactView, PreexistingConditionsView
 from django.contrib.auth.views import LogoutView
 from django.shortcuts import render
 
