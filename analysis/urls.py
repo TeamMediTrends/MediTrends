@@ -19,7 +19,7 @@ urlpatterns = [
     path("logout/", logout_page, name="logout_page"),
     path("accounts/logout/", LogoutView.as_view(), name="logout"),
     path("insights/", InsightsView.as_view(), name="insights"),
-    path("longitudinal-trends/", LongitudinalTrendsView.as_view(), name="longitudinal_trends"),
+    path("insights/longitudinal-trends/", LongitudinalTrendsView.as_view(), name="longitudinal_trends_page"),
     path("population-test-distribution/", PopulationTestDistributionView.as_view(), name="population_test_distribution"),
     path("test-correlation/", TestCorrelationView.as_view(), name="test_correlation"),
     path("patient-clustering/", PatientClusteringView.as_view(), name="patient_clustering"),
@@ -30,4 +30,6 @@ urlpatterns = [
     path("lifestyle-impact/", LifestyleImpactView.as_view(), name="lifestyle_impact"),
     path("preexisting-conditions/", PreexistingConditionsView.as_view(), name="preexisting_conditions"),
     path("report-creator/", ReportCreatorView.as_view(), name="report_creator"),
+    path('api/longitudinal-trends/', LongitudinalTrendsView.as_view(), name='longitudinal_trends_api'),
+
 ]

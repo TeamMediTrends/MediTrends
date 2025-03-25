@@ -1,21 +1,27 @@
+from django.http import JsonResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from ...mixins import AdminRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, TemplateView, FormView, CreateView, DetailView
+from django.views import View
 from django.urls import reverse_lazy
 import pandas as pd
 from ...forms import UploadFileForm, TestTypeForm, TestFilterForm
 from ...models import Patient, TestType, PatientTest
+from analysis.insights.longitudinal_trends import get_longitudinal_trends
+
 
 class InsightsView(LoginRequiredMixin, TemplateView):
     """Displays the insights page."""
     template_name = "analysis/insights/insights.html"
     context_object_name = "insights"
 
-class LongitudinalTrendsView(LoginRequiredMixin, TemplateView):
-    """Displays the page for longitudinal trends analysis."""
-    template_name = "analysis/insights/longitudinal_trends.html"
-    context_object_name = "longitudinal_trends"
+class LongitudinalTrendsView(View):
+    """Class-based view to fetch longitudinal trends of patient test data."""
+
+    def get(self, request, *args, **kwargs):
+        data = get_longitudinal_trends()
+        return JsonResponse(data, safe=False)
 
 class PopulationTestDistributionView(LoginRequiredMixin, TemplateView):
     """Displays the page for population test distribution analysis."""

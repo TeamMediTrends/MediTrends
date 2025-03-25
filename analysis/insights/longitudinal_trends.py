@@ -1,37 +1,33 @@
-import psycopg2
-import json
+import pandas as pd
+from django.db.models import Avg, Min, Max
+from analysis.models import PatientTest
+from datetime import datetime
 
-def get_longitudinal_trends(patient_id, test_type, start_date=None, end_date=None):
-    """Fetch test results over time for a given patient and test type."""
-    try:
-        conn = psycopg2.connect(
-            dbname='your_database', user='your_user', password='your_password', host='your_host'
-        )
-        cur = conn.cursor()
+def get_longitudinal_trends():
+    # Query all test records
+    test_records = PatientTest.objects.values("test_type__name", "date_taken", "result")
 
-        query = """
-            SELECT test_date, result_value
-            FROM test_results
-            WHERE patient_id = %s AND test_type = %s
-        """
-        params = [patient_id, test_type]
+    # Convert queryset to DataFrame
+    df = pd.DataFrame(list(test_records))
 
-        if start_date and end_date:
-            query += " AND test_date BETWEEN %s AND %s"
-            params.extend([start_date, end_date])
-        
-        query += " ORDER BY test_date"
-        
-        cur.execute(query, params)
-        results = cur.fetchall()
-        
-        cur.close()
-        conn.close()
-        
-        return json.dumps([{"date": row[0].strftime('%Y-%m-%d'), "value": row[1]} for row in results])
+    if df.empty:
+        return {"error": "No test data available."}
+
+    # Convert date to Year-Month format
+    df["date_taken"] = pd.to_datetime(df["date_taken"]).dt.to_period("M")
     
-    except Exception as e:
-        return json.dumps({"error": str(e)})
+    # Convert result to numeric
+    df["result"] = pd.to_numeric(df["result"], errors="coerce")
 
-# Example usage:
-# print(get_longitudinal_trends(123, 'Blood Glucose', '2020-01-01', '2025-01-01'))
+    # Aggregate by Test Type and Date
+    trends = df.groupby(["test_type__name", "date_taken"]).agg(
+        avg_result=("result", "mean"),
+        min_result=("result", "min"),
+        max_result=("result", "max")
+    ).reset_index()
+
+    # Convert to JSON-friendly format
+    trends["date_taken"] = trends["date_taken"].astype(str)
+    result_dict = trends.groupby("test_type__name").apply(lambda x: x.to_dict(orient="records")).to_dict()
+
+    return result_dict

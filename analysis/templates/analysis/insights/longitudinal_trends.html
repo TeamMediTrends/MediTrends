@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p>Longitudinal Trends in Test Results</p>
+
+<script src="{% static 'js/insights/longitudinal_trends.js' %}"></script>
+
+<div class="container">
+    <h2>Longitudinal Trends Over 5 Years</h2>
+    <canvas id="longitudinalTrendsChart"></canvas>
+</div>
+
 {% endblock %}
