@@ -13,21 +13,24 @@ def get_longitudinal_trends():
     if df.empty:
         return {"error": "No test data available."}
 
-    # Convert date to Year-Month format
-    df["date_taken"] = pd.to_datetime(df["date_taken"]).dt.to_period("M")
-    
+    # Convert date to datetime and bucket into 6-month intervals
+    df["date_taken"] = pd.to_datetime(df["date_taken"])
+    df["date_bucket"] = df["date_taken"].dt.to_period("6M")  # Every 6 months
+
     # Convert result to numeric
     df["result"] = pd.to_numeric(df["result"], errors="coerce")
 
-    # Aggregate by Test Type and Date
-    trends = df.groupby(["test_type__name", "date_taken"]).agg(
+    # Aggregate by Test Type and Date Bucket
+    trends = df.groupby(["test_type__name", "date_bucket"]).agg(
         avg_result=("result", "mean"),
         min_result=("result", "min"),
         max_result=("result", "max")
     ).reset_index()
 
+    # Convert date_bucket to string for JSON compatibility
+    trends["date_bucket"] = trends["date_bucket"].astype(str)
+    
     # Convert to JSON-friendly format
-    trends["date_taken"] = trends["date_taken"].astype(str)
     result_dict = trends.groupby("test_type__name").apply(lambda x: x.to_dict(orient="records")).to_dict()
 
     return result_dict

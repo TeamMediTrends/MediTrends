@@ -665,6 +665,81 @@ nav {
     transform: scale(1.05);
 }
 
+/********** Chart Styling **********/
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Chart Styling */
+/* Chart Container */
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+
+/* Chart Box */
+.chart-box {
+    background-color: #fff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: calc(50% - 1rem);
+    min-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.chart-box h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+/* Data Labels and Units */
+.chart-box .data-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.data-labels div {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #34495e;
+    text-transform: uppercase;
+}
+
+/* Hover Animation for Data Points */
+.chart-container .chart-box canvas {
+    transition: opacity 0.5s ease;
+}
+
+.chart-container .chart-box:hover canvas {
+    opacity: 0.8;
+}
+
 
 /********** Responsive design for mobile screens **********/
 
@@ -745,5 +820,13 @@ nav {
     .form-group select,
     .form-group input {
         width: 100%;
+    }
+
+    .chart-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .chart {
+        width: 90%;
     }
 }
