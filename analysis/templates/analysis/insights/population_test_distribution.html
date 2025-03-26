@@ -1,5 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<p>Population-Level Test Distribution</p>
+<div class="container">
+    <h1>Population-Level Test Distribution</h1>
+    <!-- This div will be populated with multiple chart wrappers by our JS -->
+    <div id="populationTestDistributionCharts"></div>
+</div>
+
+<!-- Include the custom JS for this page -->
+<script src="{% static 'js/insights/population_test_distribution.js' %}"></script>
 {% endblock %}

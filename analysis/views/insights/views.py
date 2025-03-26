@@ -9,17 +9,18 @@ import pandas as pd
 from ...forms import UploadFileForm, TestTypeForm, TestFilterForm
 from ...models import Patient, TestType, PatientTest
 from analysis.insights.longitudinal_trends import get_longitudinal_trends
-
+from analysis.insights.population_test_distribution import get_population_test_distribution
+from analysis.insights.test_correlation import get_test_correlation
 
 class InsightsView(LoginRequiredMixin, TemplateView):
     """Displays the insights page."""
     template_name = "analysis/insights/insights.html"
     context_object_name = "insights"
 
-class LongitudinalTrendsPageView(TemplateView):
+class LongitudinalTrendsPageView(LoginRequiredMixin, TemplateView):
     template_name = "analysis/insights/longitudinal_trends.html"
 
-class LongitudinalTrendsView(View):
+class LongitudinalTrendsView(LoginRequiredMixin, View):
     """Class-based view to fetch longitudinal trends of patient test data."""
 
     def get(self, request, *args, **kwargs):
@@ -31,10 +32,21 @@ class PopulationTestDistributionView(LoginRequiredMixin, TemplateView):
     template_name = "analysis/insights/population_test_distribution.html"
     context_object_name = "population_test_distribution"
 
+class PopulationTestDistributionAPIView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        data = get_population_test_distribution()
+        return JsonResponse(data, safe=False)
+
 class TestCorrelationView(LoginRequiredMixin, TemplateView):
     """Displays the page for test correlation analysis."""
     template_name = "analysis/insights/test_correlation.html"
     context_object_name = "test_correlation"
+
+class TestCorrelationAPIView(LoginRequiredMixin, View):
+    """API view that returns the correlation matrix as JSON."""
+    def get(self, request, *args, **kwargs):
+        data = get_test_correlation()
+        return JsonResponse(data, safe=False)
 
 class PatientClusteringView(LoginRequiredMixin, TemplateView):
     """Displays the page for patient clustering analysis."""

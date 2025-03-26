@@ -1,6 +1,6 @@
 from django.urls import path
 from .views.views import HomeView, UploadPatientsView, TestTypeListView, AddTestTypeView, PatientListView, PatientDetailView, PatientTestListView, ReportCreatorView
-from .views.insights.views import InsightsView, LongitudinalTrendsPageView, LongitudinalTrendsView, PopulationTestDistributionView, TestCorrelationView, PatientClusteringView, DemographicImpactView, TestAnomaliesView, SeasonalVariationsView, TestForecastingView, LifestyleImpactView, PreexistingConditionsView
+from .views.insights.views import InsightsView, LongitudinalTrendsPageView, LongitudinalTrendsView, PopulationTestDistributionView, PopulationTestDistributionAPIView, TestCorrelationView, TestCorrelationAPIView, PatientClusteringView, DemographicImpactView, TestAnomaliesView, SeasonalVariationsView, TestForecastingView, LifestyleImpactView, PreexistingConditionsView
 from django.contrib.auth.views import LogoutView
 from django.shortcuts import render
 
@@ -20,8 +20,8 @@ urlpatterns = [
     path("accounts/logout/", LogoutView.as_view(), name="logout"),
     path("insights/", InsightsView.as_view(), name="insights"),
     path("insights/longitudinal-trends/", LongitudinalTrendsPageView.as_view(), name="longitudinal_trends_page"),
-    path("population-test-distribution/", PopulationTestDistributionView.as_view(), name="population_test_distribution"),
-    path("test-correlation/", TestCorrelationView.as_view(), name="test_correlation"),
+    path("insights/population-test-distribution/", PopulationTestDistributionView.as_view(), name="population_test_distribution"),
+    path("insights/test-correlation/", TestCorrelationView.as_view(), name="test_correlation"),
     path("patient-clustering/", PatientClusteringView.as_view(), name="patient_clustering"),
     path("demographic-impact/", DemographicImpactView.as_view(), name="demographic_impact"),
     path("test-anomalies/", TestAnomaliesView.as_view(), name="test_anomalies"),
@@ -31,5 +31,8 @@ urlpatterns = [
     path("preexisting-conditions/", PreexistingConditionsView.as_view(), name="preexisting_conditions"),
     path("report-creator/", ReportCreatorView.as_view(), name="report_creator"),
     path('api/longitudinal-trends/', LongitudinalTrendsView.as_view(), name='longitudinal_trends_api'),
+    path("api/population-test-distribution/", PopulationTestDistributionAPIView.as_view(), name="population_test_distribution_api"),
+    path("api/test-correlation/", TestCorrelationAPIView.as_view(), name="test_correlation_api"),
 
+    
 ]

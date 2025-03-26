@@ -1,5 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<p>Correlation Between Test Markers</p>
+<div class="container">
+    <h2>Correlation Analysis Between Test Markers</h2>
+    <!-- Container for the dynamically created correlation table -->
+    <div id="testCorrelationContainer"></div>
+</div>
+
+<!-- Load the custom JS for correlation analysis -->
+<script src="{% static 'js/insights/test_correlation.js' %}"></script>
 {% endblock %}

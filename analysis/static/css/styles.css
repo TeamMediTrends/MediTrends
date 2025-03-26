@@ -667,19 +667,23 @@ nav {
 
 /********** Chart Styling **********/
 .container {
-    width: 90%;
+    width: 85%;
     max-width: 1200px;
     margin: auto;
     padding: 20px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-in-out forwards;
 }
 
-h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Chart Styling */
@@ -690,6 +694,16 @@ h1 {
     gap: 2rem;
     flex-wrap: wrap;
     margin-top: 3rem;
+}
+
+.container h1 {
+    color: #004450;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e8998;
+    padding-bottom: 10px;
 }
 
 /* Chart Box */
@@ -738,6 +752,58 @@ h1 {
 
 .chart-container .chart-box:hover canvas {
     opacity: 0.8;
+}
+
+.chart-wrapper {
+    background-color: #fff;
+    border: 2px solid #004450;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 800px;
+}
+
+.chart-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.chart-wrapper h3 {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #004450;
+    margin-bottom: 15px;
+}
+
+/********** Styles for the Test Correlation Chart Specifically **********/
+/* Wrap the table so it can scroll horizontally if needed */
+#testCorrelationContainer {
+    overflow-x: auto;
+    margin: 0 auto;
+}
+
+/* Style the correlation table for a more compact look */
+.correlation-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Forces columns to be of equal width */
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px; /* Smaller font for more data */
+}
+
+.correlation-table th, .correlation-table td {
+    border: 1px solid #c8c8c8;
+    padding: 4px 6px; /* Reduced padding */
+    text-align: center;
+    word-wrap: break-word;
+}
+
+/* Optional: Adjust header style */
+.correlation-table th {
+    background-color: #004450;
+    color: white;
 }
 
 
@@ -826,7 +892,12 @@ h1 {
         flex-direction: column;
         align-items: center;
     }
+    
     .chart {
         width: 90%;
+    }
+    
+    .correlation-table {
+        font-size: 10px;
     }
 }
