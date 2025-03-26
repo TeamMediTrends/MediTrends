@@ -16,6 +16,9 @@ class InsightsView(LoginRequiredMixin, TemplateView):
     template_name = "analysis/insights/insights.html"
     context_object_name = "insights"
 
+class LongitudinalTrendsPageView(TemplateView):
+    template_name = "analysis/insights/longitudinal_trends.html"
+
 class LongitudinalTrendsView(View):
     """Class-based view to fetch longitudinal trends of patient test data."""
 

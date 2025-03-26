@@ -1,6 +1,6 @@
 from django.urls import path
 from .views.views import HomeView, UploadPatientsView, TestTypeListView, AddTestTypeView, PatientListView, PatientDetailView, PatientTestListView, ReportCreatorView
-from .views.insights.views import InsightsView, LongitudinalTrendsView, PopulationTestDistributionView, TestCorrelationView, PatientClusteringView, DemographicImpactView, TestAnomaliesView, SeasonalVariationsView, TestForecastingView, LifestyleImpactView, PreexistingConditionsView
+from .views.insights.views import InsightsView, LongitudinalTrendsPageView, LongitudinalTrendsView, PopulationTestDistributionView, TestCorrelationView, PatientClusteringView, DemographicImpactView, TestAnomaliesView, SeasonalVariationsView, TestForecastingView, LifestyleImpactView, PreexistingConditionsView
 from django.contrib.auth.views import LogoutView
 from django.shortcuts import render
 
@@ -19,7 +19,7 @@ urlpatterns = [
     path("logout/", logout_page, name="logout_page"),
     path("accounts/logout/", LogoutView.as_view(), name="logout"),
     path("insights/", InsightsView.as_view(), name="insights"),
-    path("insights/longitudinal-trends/", LongitudinalTrendsView.as_view(), name="longitudinal_trends_page"),
+    path("insights/longitudinal-trends/", LongitudinalTrendsPageView.as_view(), name="longitudinal_trends_page"),
     path("population-test-distribution/", PopulationTestDistributionView.as_view(), name="population_test_distribution"),
     path("test-correlation/", TestCorrelationView.as_view(), name="test_correlation"),
     path("patient-clustering/", PatientClusteringView.as_view(), name="patient_clustering"),
