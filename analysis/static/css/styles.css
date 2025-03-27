@@ -755,6 +755,8 @@ nav {
 }
 
 .chart-wrapper {
+    width: 85%;
+    max-width: 800px;
     background-color: #fff;
     border: 2px solid #004450;
     border-radius: 10px;
@@ -763,6 +765,11 @@ nav {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     max-width: 800px;
+}
+
+.chart-wrapper canvas {
+    width: 100%;
+    height: auto; 
 }
 
 .chart-wrapper:hover {

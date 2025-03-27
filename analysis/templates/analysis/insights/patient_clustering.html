@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p>Patient Grouping Based on Test Patterns</p>
+{% load static %}
+
+<div class="container">
+    <h1>Patient Test Clustering</h1>
+    <div id="test-chart" class="chart-container"></div>
+</div>
+
+<script src="{% static 'js/insights/patient_clustering.js' %}"></script>
+
 {% endblock %}

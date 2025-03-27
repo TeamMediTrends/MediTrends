@@ -6,11 +6,15 @@ from django.views.generic import ListView, TemplateView, FormView, CreateView, D
 from django.views import View
 from django.urls import reverse_lazy
 import pandas as pd
+import json
 from ...forms import UploadFileForm, TestTypeForm, TestFilterForm
 from ...models import Patient, TestType, PatientTest
 from analysis.insights.longitudinal_trends import get_longitudinal_trends
 from analysis.insights.population_test_distribution import get_population_test_distribution
 from analysis.insights.test_correlation import get_test_correlation
+from analysis.insights.patient_clustering import get_patient_test_levels
+from analysis.insights.demographic_impact import get_demographics
+
 
 class InsightsView(LoginRequiredMixin, TemplateView):
     """Displays the insights page."""
@@ -53,10 +57,22 @@ class PatientClusteringView(LoginRequiredMixin, TemplateView):
     template_name = "analysis/insights/patient_clustering.html"
     context_object_name = "patient_clustering"
 
+class PatientTestLevelsApiView(View):
+    """API View to fetch test levels for all patients."""
+    def get(self, request, *args, **kwargs):
+        data = get_patient_test_levels()
+        return JsonResponse(data, safe=False)
+
 class DemographicImpactView(LoginRequiredMixin, TemplateView):
     """Displays the page for demographic impact analysis."""
     template_name = "analysis/insights/demographic_impact.html"
-    context_object_name = "demographic_impact"
+
+class DemographicImpactApiView(View):
+    """API View to fetch test levels for selected demographic groups."""
+    def get(self, request, *args, **kwargs):
+        filters = json.loads(request.GET.get("filters", "{}"))
+        data = get_demographics(filters)
+        return JsonResponse(data, safe=False)
 
 class TestAnomaliesView(LoginRequiredMixin, TemplateView):
     """Displays the page for test anomalies analysis."""
