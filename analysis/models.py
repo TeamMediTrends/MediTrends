@@ -43,3 +43,15 @@ class PatientTest(models.Model):
     result = models.CharField(max_length=50) 
     unit = models.CharField(max_length=20, blank=True, null=True) 
     date_taken = models.DateField()
+
+class AnomalousTestResult(models.Model):
+    patient_id = models.IntegerField()
+    test_type = models.CharField(max_length=255)
+    test_value = models.FloatField()
+    mean = models.FloatField()
+    std_dev = models.FloatField()
+    deviation_score = models.FloatField()
+    detected_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Anomaly in {self.test_type} for Patient {self.patient_id}"

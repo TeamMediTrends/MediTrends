@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 import pandas as pd
 import json
 from ...forms import UploadFileForm, TestTypeForm, TestFilterForm
-from ...models import Patient, TestType, PatientTest
+from ...models import Patient, TestType, PatientTest, AnomalousTestResult
 from analysis.insights.longitudinal_trends import get_longitudinal_trends
 from analysis.insights.population_test_distribution import get_population_test_distribution
 from analysis.insights.test_correlation import get_test_correlation
@@ -75,10 +75,13 @@ class DemographicImpactApiView(View):
         return JsonResponse(data, safe=False)
 
 class TestAnomaliesView(LoginRequiredMixin, TemplateView):
-    """Displays the page for test anomalies analysis."""
     template_name = "analysis/insights/test_anomalies.html"
-    context_object_name = "test_anomalies"
 
+class TestAnomaliesAPIView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        anomalies = list(AnomalousTestResult.objects.all().values())
+        return JsonResponse(anomalies, safe=False)
+    
 class SeasonalVariationsView(LoginRequiredMixin, TemplateView):
     """Displays the page for seasonal variations analysis."""
     template_name = "analysis/insights/seasonal_variations.html"

@@ -1,6 +1,6 @@
 from django.urls import path
 from .views.views import HomeView, UploadPatientsView, TestTypeListView, AddTestTypeView, PatientListView, PatientDetailView, PatientTestListView, ReportCreatorView
-from .views.insights.views import InsightsView, LongitudinalTrendsPageView, LongitudinalTrendsView, PopulationTestDistributionView, PopulationTestDistributionAPIView, TestCorrelationView, TestCorrelationAPIView, PatientClusteringView, PatientTestLevelsApiView, DemographicImpactView, DemographicImpactApiView, TestAnomaliesView, SeasonalVariationsView, TestForecastingView, LifestyleImpactView, PreexistingConditionsView
+from .views.insights.views import InsightsView, LongitudinalTrendsPageView, LongitudinalTrendsView, PopulationTestDistributionView, PopulationTestDistributionAPIView, TestCorrelationView, TestCorrelationAPIView, PatientClusteringView, PatientTestLevelsApiView, DemographicImpactView, DemographicImpactApiView, TestAnomaliesView, TestAnomaliesAPIView, SeasonalVariationsView, TestForecastingView, LifestyleImpactView, PreexistingConditionsView
 from django.contrib.auth.views import LogoutView
 from django.shortcuts import render
 
@@ -24,7 +24,7 @@ urlpatterns = [
     path("insights/test-correlation/", TestCorrelationView.as_view(), name="test_correlation"),
     path("insights/patient-clustering/", PatientClusteringView.as_view(), name="patient_clustering"),
     path("insights/demographic-impact/", DemographicImpactView.as_view(), name="demographic_impact"),
-    path("test-anomalies/", TestAnomaliesView.as_view(), name="test_anomalies"),
+    path("insights/test-anomalies/", TestAnomaliesView.as_view(), name="test_anomalies"),
     path("seasonal-variations/", SeasonalVariationsView.as_view(), name="seasonal_variations"),
     path("test-forecasting/", TestForecastingView.as_view(), name="test_forecasting"),
     path("lifestyle-impact/", LifestyleImpactView.as_view(), name="lifestyle_impact"),
@@ -35,6 +35,7 @@ urlpatterns = [
     path("api/test-correlation/", TestCorrelationAPIView.as_view(), name="test_correlation_api"),
     path("api/patient-test-levels/", PatientTestLevelsApiView.as_view(), name="patient_test_levels_api"),
     path("api/demographic-impact/", DemographicImpactApiView.as_view(), name="demographic_impact_api"),
+    path("api/test-anomalies/", TestAnomaliesAPIView.as_view(), name="test_anomalies_api"),
 
     
 ]

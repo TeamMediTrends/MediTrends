@@ -1,5 +1,30 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-<p>Test Result Anomalies & Outliers</p>
+<div class="container">
+    <h1>Test Anomalies</h1>
+
+    <!-- Heatmap: Anomaly Frequency over Time -->
+    <div id="heatmap" style="height:400px;"></div>
+
+    <!-- Scatter Plot: Outliers over time -->
+    <div id="scatter" style="height:400px;"></div>
+
+    <!-- Box Plot: Distribution of anomalous values per test type -->
+    <div id="boxplot" style="height:400px;"></div>
+
+    <!-- Histogram: Frequency distribution of anomalous test values -->
+    <div id="histogram" style="height:400px;"></div>
+
+    <!-- Animated Time-Series: Trend of average deviation score -->
+    <div id="animated-timeseries" style="height:400px;"></div>
+
+    <!-- Table: Detailed anomaly lookup -->
+    <div id="anomalies-table"></div>
+</div>
+
+<!-- Plotly Library -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!-- Our custom JavaScript for anomalies -->
+<script src="{% static 'js/insights/test_anomalies.js' %}"></script>
 {% endblock %}
