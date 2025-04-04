@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h1>Demo Filter Page</h1>
+        
+        <form id="filter-form">
+            <div>
+                <input type="checkbox" id="filter-sex" class="filter-input" name="sex" />
+                <label for="filter-sex">Sex</label>
+                <div id="sex-options">
+                    <select id="sex-select">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                        <option value="O">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" id="apply-filter">Apply Filter</button>
+        </form>
+
+        <div id="results-container"></div>
+    </div>
+
+    <script src="{% static 'js/insights/demo.js' %}"></script>
+{% endblock %}

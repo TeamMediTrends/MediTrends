@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Income Demographics</h1>
+    <p class="lead">
+        These tables show the overall income distribution and how income relates to key demographic factors.
+    </p>
+
+    <!-- Income Distribution Table -->
+    <div class="demographic-category">
+        <h2>Income Distribution</h2>
+        <table class="table dynamic-table">
+            <thead>
+                <tr>
+                    <th>Income Class</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for income_class, percent in income_data.income_distribution.items %}
+                <tr>
+                    <td>{{ income_class }}</td>
+                    <td>{{ percent }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Income Impact on Demographics -->
+    <div class="demographic-category">
+        <h2>Income Impact on Demographics</h2>
+        {% for demo, income_classes in income_data.income_impact.items %}
+        <div class="income-impact-category mb-4">
+            <h3>{{ demo }}</h3>
+            <table class="table dynamic-table">
+                <thead>
+                    <tr>
+                        <th>Income Class (Overall %)</th>
+                        <th>Distribution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for income_class, data in income_classes.items %}
+                    <tr>
+                        <td>
+                            {{ income_class }} ({{ data.overall }}%)
+                        </td>
+                        <td>
+                            {% if data.distribution %}
+                            {% for key, percent in data.distribution.items %}
+                            <strong>{{ key }}:</strong> {{ percent }}%<br>
+                            {% endfor %}
+                            {% else %}
+                            N/A
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

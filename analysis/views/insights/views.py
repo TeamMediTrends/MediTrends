@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, TemplateView, FormView, CreateView, DetailView
 from django.views import View
 from django.urls import reverse_lazy
+from datetime import date
 import pandas as pd
 import json
 from ...forms import UploadFileForm, TestTypeForm, TestFilterForm
@@ -14,6 +15,8 @@ from analysis.insights.population_test_distribution import get_population_test_d
 from analysis.insights.test_correlation import get_test_correlation
 from analysis.insights.patient_clustering import get_patient_test_levels
 from analysis.insights.demographic_impact import get_demographics
+from analysis.insights.lifestyle_impact import get_demographic_percentages
+from analysis.insights.income_demographics import get_income_demographics
 
 
 class InsightsView(LoginRequiredMixin, TemplateView):
@@ -62,18 +65,7 @@ class PatientTestLevelsApiView(View):
     def get(self, request, *args, **kwargs):
         data = get_patient_test_levels()
         return JsonResponse(data, safe=False)
-
-class DemographicImpactView(LoginRequiredMixin, TemplateView):
-    """Displays the page for demographic impact analysis."""
-    template_name = "analysis/insights/demographic_impact.html"
-
-class DemographicImpactApiView(View):
-    """API View to fetch test levels for selected demographic groups."""
-    def get(self, request, *args, **kwargs):
-        filters = json.loads(request.GET.get("filters", "{}"))
-        data = get_demographics(filters)
-        return JsonResponse(data, safe=False)
-
+    
 class TestAnomaliesView(LoginRequiredMixin, TemplateView):
     template_name = "analysis/insights/test_anomalies.html"
 
@@ -81,23 +73,146 @@ class TestAnomaliesAPIView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         anomalies = list(AnomalousTestResult.objects.all().values())
         return JsonResponse(anomalies, safe=False)
-    
-class SeasonalVariationsView(LoginRequiredMixin, TemplateView):
-    """Displays the page for seasonal variations analysis."""
-    template_name = "analysis/insights/seasonal_variations.html"
-    context_object_name = "seasonal_variations"
-
-class TestForecastingView(LoginRequiredMixin, TemplateView):
-    """Displays the page for test forecasting analysis."""
-    template_name = "analysis/insights/test_forecasting.html"
-    context_object_name = "test_forecasting"
 
 class LifestyleImpactView(LoginRequiredMixin, TemplateView):
-    """Displays the page for lifestyle impact analysis."""
     template_name = "analysis/insights/lifestyle_impact.html"
-    context_object_name = "lifestyle_impact"
 
-class PreexistingConditionsView(LoginRequiredMixin, TemplateView):
-    """Displays the page for preexisting conditions analysis."""
-    template_name = "analysis/insights/preexisting_conditions.html"
-    context_object_name = "preexisting_conditions"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["demographics"] = get_demographic_percentages()
+        return context
+    
+class IncomeDemographicsView(TemplateView):
+    template_name = "analysis/insights/income_demographics.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["income_data"] = get_income_demographics()
+        return context
+
+class DemoPageView(TemplateView):
+    template_name = "analysis/insights/demo.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+class DemoFilterResultsView(View):
+    def get(self, request):
+        filters = json.loads(request.GET.get("filters", "{}"))
+        print("🔍 Received Filters:", filters)  # Debugging
+
+        queryset = PatientTest.objects.all()
+
+        # If filtering by sex, first get patient IDs
+        if "sex" in filters:
+            patient_ids = Patient.objects.filter(sex=filters["sex"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+
+        print(f"Filtered results count: {queryset.count()}")  # Debugging
+        data = list(queryset.values("test_type", "date_taken", "result"))
+
+        return JsonResponse({"test_data": data})
+
+class DemographicImpactView(LoginRequiredMixin, TemplateView):
+    """Displays the page for demographic impact analysis."""
+    template_name = "analysis/insights/demographic_impact.html"
+
+class DemographicImpactApiView(View):
+    """API View to fetch test levels for selected demographic groups."""
+    def get(self, request):
+        filters = json.loads(request.GET.get("filters", "{}"))
+        
+        print("🔍 Received Filters:", filters)  # Debugging
+        
+        queryset = PatientTest.objects.all()
+
+        # Apply filters based on provided criteria in the filters dictionary
+        if "smoking" in filters:
+            patient_ids = Patient.objects.filter(smoking=filters["smoking"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+
+        if "overweight" in filters:
+            patient_ids = Patient.objects.filter(overweight=filters["overweight"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+
+        if "religious" in filters:
+            patient_ids = Patient.objects.filter(religious=filters["religious"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+
+        if "pre_existing_conditions" in filters:
+            patient_ids = Patient.objects.filter(pre_existing_conditions=filters["pre_existing_conditions"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+
+        if "alcohol" in filters:
+            patient_ids = Patient.objects.filter(alcohol=filters["alcohol"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+
+        if "drugs" in filters:
+            patient_ids = Patient.objects.filter(drugs=filters["drugs"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+            
+            # Handling state filter - support multiple states
+        if "state" in filters:
+            patient_ids = Patient.objects.filter(state__in=filters["state"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+            
+        if "sex" in filters:
+            patient_ids = Patient.objects.filter(sex__in=filters["sex"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+            
+        if "marital_status" in filters:
+            patient_ids = Patient.objects.filter(marital_status__in=filters["marital_status"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+            
+        if "education_level" in filters:
+            patient_ids = Patient.objects.filter(education_level__in=filters["education_level"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+            
+        if "ethnicity" in filters:
+            patient_ids = Patient.objects.filter(ethnicity__in=filters["ethnicity"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+            
+        if "dependents" in filters:
+            patient_ids = Patient.objects.filter(dependents__in=filters["dependents"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+            
+        if "insurance_status" in filters:
+            patient_ids = Patient.objects.filter(insurance_status__in=filters["insurance_status"]).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+            
+        if "income" in filters:
+            income_ranges = {
+                "Lower income": (0, 25000),
+                "Lower middle": (25000, 50000),
+                "Middle class": (50000, 100000),
+                "Upper middle class": (100000, 200000)
+            }
+            for label, (min_inc, max_inc) in income_ranges.items():
+                if label in filters["income"]:
+                    patient_ids = Patient.objects.filter(income__gte=min_inc, income__lte=max_inc).values_list("id", flat=True)
+                    queryset = queryset.filter(patient_id__in=patient_ids)
+        
+        if "min_age" in filters:
+            min_age = int(filters["min_age"])
+            today = date.today()
+            max_birth_date = date(today.year - min_age, today.month, today.day)
+            patient_ids = Patient.objects.filter(dob__lte=max_birth_date).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+            
+        if "max_age" in filters:
+            max_age = int(filters["max_age"])
+            today = date.today()
+            min_birth_date = date(today.year - max_age, today.month, today.day)
+            patient_ids = Patient.objects.filter(dob__gte=min_birth_date).values_list("id", flat=True)
+            queryset = queryset.filter(patient_id__in=patient_ids)
+                
+        # If no filters are applied, return all test results
+        if not filters:
+            queryset = PatientTest.objects.all()
+            
+        print(f"Filtered results count: {queryset.count()}")  # Debugging
+        data = list(queryset.values("test_type", "date_taken", "result"))
+
+        return JsonResponse({"test_data": data})

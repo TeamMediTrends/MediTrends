@@ -813,6 +813,139 @@ nav {
     color: white;
 }
 
+  /* Demographic Container styles */
+.demographic-category {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.demographic-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Demographic Table styling */
+table.dynamic-table {
+    width: 50%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+table.dynamic-table th,
+table.dynamic-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+table.dynamic-table thead {
+    background-color: #004450;
+    color: #fff;
+}
+table.dynamic-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+table.dynamic-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+table.dynamic-table tbody tr:last-child {
+    border-bottom: 2px solid #004450;
+}
+
+/* Demographic Alternate row background */
+table.dynamic-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Demographic Highlight style for the highest percentage row */
+.highlight {
+    background-color: #fff3cd; /* light yellow */
+    font-weight: bold;
+}
+
+/* Style for the demographic filter form container */
+#demographic-filter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+    padding: 20px;
+    margin: 40px auto;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+#demographic-filter-form h3 {
+    color: #004450;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e8998;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+/* Each filter item: use a row flex layout */
+#demographic-filters > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+/* Label styling: align text left */
+#demographic-filters label {
+    flex: 1;
+    text-align: left;
+    font-weight: bold;
+    margin-right: 10px;
+    color: #004450;
+}
+
+/* Input, select, etc.: align to the right */
+.filter-input {
+    flex: 1;
+    max-width: 250px; /* or any width you prefer */
+    text-align: right;
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #c8c8c8;
+    border-radius: 5px;
+}
+
+
+/* Style for the Apply Filters button */
+#apply-filters {
+    background-color: #004450;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid #004450;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s;
+    margin-top: 20px;
+}
+
+#apply-filters:hover {
+    background-color: #82dddf;
+    color: black;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: Center the form content */
+#demographic-filter-form {
+    text-align: center;
+}
+
 
 /********** Responsive design for mobile screens **********/
 
@@ -906,5 +1039,9 @@ nav {
     
     .correlation-table {
         font-size: 10px;
+    }
+
+    table.dynamic-table th, table.dynamic-table td {
+        padding: 8px 10px;
     }
 }

@@ -1,5 +1,35 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-<p>Relationship Between Lifestyle Factors & Test Results</p>
+<div class="container">
+    <h1 class="my-4">Demographic Insights</h1>
+    <p class="lead">These percentages reflect the distribution of key demographic characteristics across our entire
+        patient population.</p>
+
+    {% if demographics.error %}
+    <p>{{ demographics.error }}</p>
+    {% else %}
+    {% for category, distribution in demographics.items %}
+    <div class="demographic-category">
+        <h2>{{ category }}</h2>
+        <table class="table dynamic-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, value in distribution.items %}
+                <tr>
+                    <td>{{ key }}</td>
+                    <td>{{ value }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
 {% endblock %}
