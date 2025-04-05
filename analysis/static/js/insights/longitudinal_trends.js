@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function createCharts(data) {
-    console.log("Chart Data:", data); // Debugging
 
     const container = document.getElementById("longitudinalTrendsCharts");
     container.innerHTML = ""; // Clear previous charts if any

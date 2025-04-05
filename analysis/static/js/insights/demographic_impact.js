@@ -12,76 +12,41 @@ document.addEventListener("DOMContentLoaded", function () {
     function fetchFilteredData() {
         const filters = {};
 
-        // Iterate over all filter inputs
-        document.querySelectorAll(".filter-input").forEach(input => {
-            if (!input.name) return; // Ensure input has a name
+        document.querySelectorAll(".filter-input").forEach((input) => {
+            const name = input.name;
+            if (!name) return;
 
-            if (input.type === "checkbox") {
+            const tag = input.tagName;
+            const type = input.type;
+
+            // Checkbox
+            if (type === "checkbox") {
                 if (input.checked) {
-                    filters[input.name] = true; // If checked, set value to true
+                    filters[name] = true;
                 }
-            } else if (input.type === "number" && input.value !== "") {
-                filters[input.name] = input.value;
-            } else if (input.tagName === "SELECT" && input.name === "state") {
-                // Handle multi-select for state
-                const selectedStates = Array.from(input.selectedOptions)
-                    .map(option => option.value);
-                if (selectedStates.length > 0) {
-                    filters.state = selectedStates; // Store selected states as an array
+                return;
+            }
+
+            // Number and text inputs
+            if ((type === "number" || type === "text") && input.value !== "") {
+                filters[name] = input.value;
+                return;
+            }
+
+            // Select inputs (including multi-selects)
+            if (tag === "SELECT") {
+                const selected = Array.from(input.selectedOptions)
+                    .map((opt) => opt.value)
+                    .filter((v) => v !== "");
+                if (selected.length > 0) {
+                    filters[name] = selected;
                 }
-            } else if (input.tagName === "SELECT" && input.name === "sex") {
-                const selectedSex = Array.from(input.selectedOptions)
-                    .map(option => option.value);
-                if (selectedSex.length > 0) {
-                    filters.sex = selectedSex;
-                }
-            } else if (input.tagName === "SELECT" && input.name === "marital_status") {
-                const selectedMaritalStatus = Array.from(input.selectedOptions)
-                    .map(option => option.value);
-                if (selectedMaritalStatus.length > 0) {
-                    filters.marital_status = selectedMaritalStatus; // Store selected value
-                }
-            } else if (input.tagName === "SELECT" && input.name === "education_level") {
-                const selectedEducationLevel = Array.from(input.selectedOptions)
-                    .map(option => option.value);
-                if (selectedEducationLevel.length > 0) {
-                    filters.education_level = selectedEducationLevel; // Store selected value
-                }
-            } else if (input.tagName === "SELECT" && input.name === "ethnicity") {
-                const selectedEthnicity = Array.from(input.selectedOptions)
-                    .map(option => option.value);
-                if (selectedEthnicity.length > 0) {
-                    filters.ethnicity = selectedEthnicity; // Store selected value
-                }
-            } else if (input.tagName === "SELECT" && input.name === "insurance_status") {
-                const selectedInsuranceStatus = Array.from(input.selectedOptions)
-                    .map(option => option.value);
-                if (selectedInsuranceStatus.length > 0) {
-                    filters.insurance_status = selectedInsuranceStatus; // Store selected value
-                }
-            } else if (input.tagName === "SELECT" && input.name === "dependents") {
-                const selectedDependents = Array.from(input.selectedOptions)
-                    .map(option => option.value);
-                if (selectedDependents.length > 0) {
-                    filters.dependents = selectedDependents; // Store selected value
-                }
-            } else if (input.tagName === "SELECT" && input.name === "income") {
-                const selectedIncome = Array.from(input.selectedOptions)
-                    .map(option => option.value);
-                if (selectedIncome.length > 0) {
-                    filters.income = selectedIncome;
-                }
-            } else if (input.tagName === "INPUT" && input.name === "min_age") {
-                if (input.value !== "") {
-                    filters[input.name] = input.value;
-                }
-            } else if (input.tagName === "INPUT" && (input.name === "max_age")) {
-                if (input.value !== "") {
-                    filters[input.name] = input.value;
-                }
-            } else if (input.value) {
-                // Handle other types of inputs like text fields, etc.
-                filters[input.name] = input.value;
+                return;
+            }
+
+            // Other inputs
+            if (input.value) {
+                filters[name] = input.value;
             }
         });
 
@@ -92,49 +57,110 @@ document.addEventListener("DOMContentLoaded", function () {
 
         console.log("Filters being sent:", filters);
 
-        // Encode the filters object and send it to the API
-        const apiUrl = `/api/demographic-impact/?filters=${encodeURIComponent(JSON.stringify(filters))}`;
+        const apiUrl = `/api/demographic-impact/?filters=${encodeURIComponent(
+            JSON.stringify(filters)
+        )}`;
         console.log("API Request URL:", apiUrl);
 
+        // Show loading icon
+        const loadingIcon = document.getElementById("loading-icon");
+        loadingIcon.style.display = "block";  // Show loading icon
+        resultsContainer.innerHTML = ""; // Clear previous results
+
         fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
+            .then((response) => response.json())
+            .then((data) => {
                 console.log("API Response:", data);
-                updateCharts(data.test_data);
-                criteriaDisplay.textContent = `Selected Criteria: ${JSON.stringify(filters, null, 2)}`;
-                percentageDisplay.textContent = `Matching Patients: ${data.selected_percentage}%`;
+
+                // Update chart with test_data
+                createCharts(data);
+
+                // Display matched group percentage
+                percentageDisplay.textContent = `Percentage of Patients That Match Filters: ${data.patient_percentage.toFixed(
+                    2
+                )}%`; // Use data.patient_percentage and limit to two decimal places
+
+                // Hide loading icon after data is successfully fetched
+                loadingIcon.style.display = "none";  // Hide loading icon
             })
-            .catch(error => console.error("Error fetching data:", error));
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+                resultsContainer.innerHTML =
+                    "<p>Error fetching data. Please try again later.</p>";
+
+                // Hide loading icon in case of error
+                loadingIcon.style.display = "none";  // Hide loading icon
+            });
     }
-
-    // function updateCharts(data) {
-    //     resultsContainer.innerHTML = ""; // Clear previous charts
-
-    //     Object.keys(data).forEach(testName => {
-    //         const canvas = document.createElement("canvas");
-    //         resultsContainer.appendChild(canvas);
-
-    //         new Chart(canvas, {
-    //             type: "line",
-    //             data: {
-    //                 labels: Object.keys(data[testName]),
-    //                 datasets: [{
-    //                     label: testName,
-    //                     data: Object.values(data[testName]),
-    //                     borderColor: "#004450",
-    //                     backgroundColor: "rgba(0, 68, 80, 0.2)",
-    //                     fill: true,
-    //                 }]
-    //             },
-    //             options: {
-    //                 responsive: true,
-    //                 maintainAspectRatio: false,
-    //                 scales: {
-    //                     x: { title: { display: true, text: "Date" } },
-    //                     y: { title: { display: true, text: "Average Test Value" } }
-    //                 }
-    //             }
-    //         });
-    //     });
-    // }
 });
+
+function createCharts(data) {
+    const container = document.getElementById("results-container");
+    container.innerHTML = ""; // Clear previous charts
+
+    const groupedByTest = {};
+
+    data.test_data.forEach((entry) => {
+        if (!groupedByTest[entry.test_type]) {
+            groupedByTest[entry.test_type] = [];
+        }
+        groupedByTest[entry.test_type].push(entry);
+    });
+
+    const testTypes = Object.keys(groupedByTest);
+    console.log("Test Types:", testTypes);
+
+    testTypes.forEach((testType) => {
+        const chartDiv = document.createElement("div");
+        chartDiv.classList.add("chart-wrapper");
+
+        // Assuming the test_type key holds the test name now
+        const title = document.createElement("h3");
+        title.textContent = testType; // This is now the test name
+
+        const canvas = document.createElement("canvas");
+        canvas.id = `chart-${testType.replace(/\s+/g, "-")}`;
+
+        chartDiv.appendChild(title);
+        chartDiv.appendChild(canvas);
+        container.appendChild(chartDiv);
+
+        const labels = [
+            ...new Set(
+                groupedByTest[testType].map((entry) => entry.date_taken)
+            ),
+        ];
+
+        const dataset = {
+            label: testType,
+            data: labels.map((date) => {
+                const record = groupedByTest[testType].find(
+                    (entry) => entry.date_taken === date
+                );
+                return record ? record.result : null;
+            }),
+            borderWidth: 2,
+            fill: false,
+            tension: 0.3,
+        };
+
+        new Chart(canvas, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [dataset],
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                    },
+                    title: {
+                        display: false,
+                    },
+                },
+            },
+        });
+    });
+}

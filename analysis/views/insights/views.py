@@ -8,7 +8,6 @@ from django.urls import reverse_lazy
 from datetime import date
 import pandas as pd
 import json
-from ...forms import UploadFileForm, TestTypeForm, TestFilterForm
 from ...models import Patient, TestType, PatientTest, AnomalousTestResult
 from analysis.insights.longitudinal_trends import get_longitudinal_trends
 from analysis.insights.population_test_distribution import get_population_test_distribution
@@ -110,7 +109,6 @@ class DemoFilterResultsView(View):
             patient_ids = Patient.objects.filter(sex=filters["sex"]).values_list("id", flat=True)
             queryset = queryset.filter(patient_id__in=patient_ids)
 
-        print(f"Filtered results count: {queryset.count()}")  # Debugging
         data = list(queryset.values("test_type", "date_taken", "result"))
 
         return JsonResponse({"test_data": data})
@@ -123,9 +121,7 @@ class DemographicImpactApiView(View):
     """API View to fetch test levels for selected demographic groups."""
     def get(self, request):
         filters = json.loads(request.GET.get("filters", "{}"))
-        
-        print("🔍 Received Filters:", filters)  # Debugging
-        
+                
         queryset = PatientTest.objects.all()
 
         # Apply filters based on provided criteria in the filters dictionary
@@ -212,7 +208,16 @@ class DemographicImpactApiView(View):
         if not filters:
             queryset = PatientTest.objects.all()
             
-        print(f"Filtered results count: {queryset.count()}")  # Debugging
-        data = list(queryset.values("test_type", "date_taken", "result"))
+        data = []
+        for test in queryset:
+            data.append({
+                "test_type": test.test_type.name,  # ✅ this gets the name instead of the ID
+                "date_taken": test.date_taken,
+                "result": test.result,
+            })
 
-        return JsonResponse({"test_data": data})
+        data_count = len(data)
+        patient_count = data_count / 1260
+        patient_percentage = (patient_count / 55) * 100
+
+        return JsonResponse({"test_data": data, "patient_percentage": patient_percentage})

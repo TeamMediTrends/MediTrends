@@ -4,140 +4,236 @@
 
     <form id="demographic-filter-form">
         <div id="demographic-filters">
-            <h3>Select Demographics</h3>
+            <h3>Select Demographics To Filter By</h3>
 
-            <div>
-                <input type="checkbox" id="filter-smoking" class="filter-input" name="smoking" />
-                <label for="filter-smoking">Smoking</label>
-            </div>
-            
-            <div>
-                <input type="checkbox" id="filter-overweight" class="filter-input" name="overweight" />
-                <label for="filter-overweight">Overweight</label>
-            </div>
-            
-            <div>
-                <input type="checkbox" id="filter-religious" class="filter-input" name="religious" />
-                <label for="filter-religious">Religious</label>
-            </div>
-            
-            <div>
-                <input type="checkbox" id="filter-pre_existing_conditions" class="filter-input" name="pre_existing_conditions" />
-                <label for="filter-pre_existing_conditions">Pre-existing Conditions</label>
-            </div>
-            
-            <div>
-                <input type="checkbox" id="filter-alcohol" class="filter-input" name="alcohol" />
-                <label for="filter-alcohol">Alcohol</label>
-            </div>
-            
-            <div>
-                <input type="checkbox" id="filter-drugs" class="filter-input" name="drugs" />
-                <label for="filter-drugs">Drugs</label>
-            </div>
+            <div class="filter-groups">
+                <div>
+                    <input
+                        type="checkbox"
+                        id="filter-smoking"
+                        class="filter-input"
+                        name="smoking"
+                    />
+                    <label for="filter-smoking">Smoking</label>
+                </div>
 
-            <div>
-                <label for="filter-state">State</label>
-                <select id="filter-state" class="filter-input" name="state" multiple>
-                    <option value="CA">California</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="IL">Illinois</option>
-                    <option value="MI">Michigan</option>
-                    <option value="OH">Ohio</option>
-                    <option value="PA">Pennsylvania</option>
-                    <option value="NC">North Carolina</option>
-                    <option value="NY">New York</option>
-                    <option value="TX">Texas</option>
-                </select>
-            </div>
+                <div>
+                    <input
+                        type="checkbox"
+                        id="filter-overweight"
+                        class="filter-input"
+                        name="overweight"
+                    />
+                    <label for="filter-overweight">Overweight</label>
+                </div>
 
-            <div>
-                <label for="filter-age-min">Min Age</label>
-                <input type="number" id="filter-age-min" class="filter-input" name="min_age" />
-            </div>
-            
-            <div>
-                <label for="filter-age-max">Max Age</label>
-                <input type="number" id="filter-age-max" class="filter-input" name="max_age" />
-            </div>
-            
-            <div>
-                <label for="filter-sex">Sex</label>
-                <select id="filter-sex" class="filter-input" name="sex" multiple>
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
-                    <option value="O">Other</option>
-                </select>
-            </div>
+                <div>
+                    <input
+                        type="checkbox"
+                        id="filter-religious"
+                        class="filter-input"
+                        name="religious"
+                    />
+                    <label for="filter-religious">Religious</label>
+                </div>
 
-            <div>
-                <label for="filter-marital_status">Marital Status</label>
-                <select id="filter-marital_status" class="filter-input" name="marital_status" multiple>
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                    <option value="Divorced">Divorced</option>
-                    <option value="Widowed">Widowed</option>
-                </select>
-            </div>
+                <div>
+                    <input
+                        type="checkbox"
+                        id="filter-pre_existing_conditions"
+                        class="filter-input"
+                        name="pre_existing_conditions"
+                    />
+                    <label for="filter-pre_existing_conditions"
+                        >Pre-existing Conditions</label
+                    >
+                </div>
 
-            <div>
-                <label for="filter-education_level">Education Level</label>
-                <select id="filter-education_level" class="filter-input" name="education_level" multiple>
-                    <option value="High School">High School</option>
-                    <option value="Associate">Associate</option>
-                    <option value="Bachelor">Bachelor</option>
-                    <option value="Master">Master</option>
-                    <option value="Doctorate">Doctorate</option>
-                </select>
-            </div>
+                <div>
+                    <input
+                        type="checkbox"
+                        id="filter-alcohol"
+                        class="filter-input"
+                        name="alcohol"
+                    />
+                    <label for="filter-alcohol">Alcohol</label>
+                </div>
 
-            <div>
-                <label for="filter-dependents">Number of Dependents</label>
-                <select id="filter-dependents" class="filter-input" name="dependents" multiple>
-                    <option value="0">None</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                    <option value="4">Four</option>
-                    <option value="5">Five</option>
-                </select>
-            </div>
+                <div>
+                    <input
+                        type="checkbox"
+                        id="filter-drugs"
+                        class="filter-input"
+                        name="drugs"
+                    />
+                    <label for="filter-drugs">Drugs</label>
+                </div>
 
-            <div>
-                <label for="filter-income">Income Class</label>
-                <select id="filter-income" class="filter-input" name="income" multiple>
-                    <option value="Lower income">Lower Class</option>
-                    <option value="Lower middle">Lower Middle Class</option>
-                    <option value="Middle class">Middle Class</option>
-                    <option value="Upper middle class">Upper Middle Class</option>
-                </select>
-            </div>
+                <div class="age-group-filter">
+                    <div class="age">
+                        <label for="filter-age-min">Min Age</label>
+                        <input
+                            type="number"
+                            id="filter-age-min"
+                            class="filter-input"
+                            name="min_age"
+                        />
+                    </div>
 
-            <div>
-                <label for="filter-ethnicity">Ethnicity</label>
-                <select id="filter-ethnicity" class="filter-input" name="ethnicity" multiple>
-                    <option value="African American">African American</option>
-                    <option value="Caucasian">Caucasian</option>
-                    <option value="Asian">Asian</option>
-                    <option value="Hispanic">Hispanic</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
+                    <div class="age">
+                        <label for="filter-age-max">Max Age</label>
+                        <input
+                            type="number"
+                            id="filter-age-max"
+                            class="filter-input"
+                            name="max_age"
+                        />
+                    </div>
+                </div>
+                <!-- End of age-group-filter -->
 
-            <div>
-                <label for="filter-insurance_status">Insurance Status</label>
-                <select id="filter-insurance_status" class="filter-input" name="insurance_status" multiple>
-                    <option value="Insured">Insured</option>
-                    <option value="Uninsured">Uninsured</option>
-                </select>
-            </div>
+                <div>
+                    <label for="filter-state">State</label>
+                    <select
+                        id="filter-state"
+                        class="filter-input"
+                        name="state"
+                        multiple
+                    >
+                        <option value="CA">California</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="IL">Illinois</option>
+                        <option value="MI">Michigan</option>
+                        <option value="OH">Ohio</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="NY">New York</option>
+                        <option value="TX">Texas</option>
+                    </select>
+                </div>
 
-            
+                <div>
+                    <label for="filter-sex">Sex</label>
+                    <select
+                        id="filter-sex"
+                        class="filter-input"
+                        name="sex"
+                        multiple
+                    >
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                        <option value="O">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="filter-marital_status">Marital Status</label>
+                    <select
+                        id="filter-marital_status"
+                        class="filter-input"
+                        name="marital_status"
+                        multiple
+                    >
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Divorced">Divorced</option>
+                        <option value="Widowed">Widowed</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filter-education_level">Education Level</label>
+                    <select
+                        id="filter-education_level"
+                        class="filter-input"
+                        name="education_level"
+                        multiple
+                    >
+                        <option value="High School">High School</option>
+                        <option value="Associate">Associate</option>
+                        <option value="Bachelor">Bachelor</option>
+                        <option value="Master">Master</option>
+                        <option value="Doctorate">Doctorate</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filter-dependents">Number of Dependents</label>
+                    <select
+                        id="filter-dependents"
+                        class="filter-input"
+                        name="dependents"
+                        multiple
+                    >
+                        <option value="0">None</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="4">Four</option>
+                        <option value="5">Five</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filter-income">Income Class</label>
+                    <select
+                        id="filter-income"
+                        class="filter-input"
+                        name="income"
+                        multiple
+                    >
+                        <option value="Lower income">Lower Class</option>
+                        <option value="Lower middle">Lower Middle Class</option>
+                        <option value="Middle class">Middle Class</option>
+                        <option value="Upper middle class">
+                            Upper Middle Class
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filter-ethnicity">Ethnicity</label>
+                    <select
+                        id="filter-ethnicity"
+                        class="filter-input"
+                        name="ethnicity"
+                        multiple
+                    >
+                        <option value="African American">
+                            African American
+                        </option>
+                        <option value="Caucasian">Caucasian</option>
+                        <option value="Asian">Asian</option>
+                        <option value="Hispanic">Hispanic</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="filter-insurance_status"
+                        >Insurance Status</label
+                    >
+                    <select
+                        id="filter-insurance_status"
+                        class="filter-input"
+                        name="insurance_status"
+                        multiple
+                    >
+                        <option value="Insured">Insured</option>
+                        <option value="Uninsured">Uninsured</option>
+                    </select>
+                </div>
+            </div>
+            <!-- End of filter-groups -->
+
             <button id="apply-filters">Apply Filters</button>
         </div>
     </form>
 
+    <!-- Loading Icon (Initially hidden) -->
+    <div id="loading-icon" class="loading" style="display: none">
+        <img src="path_to_loading_icon.gif" alt="Loading..." />
+    </div>
 
     <div id="selected-criteria"></div>
     <div id="selected-percentage"></div>

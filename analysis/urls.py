@@ -25,7 +25,8 @@ urlpatterns = [
     path("insights/patient-clustering/", PatientClusteringView.as_view(), name="patient_clustering"),
     path("insights/demographic-impact/", DemographicImpactView.as_view(), name="demographic_impact"),
     path("insights/test-anomalies/", TestAnomaliesView.as_view(), name="test_anomalies"),
-    path("lifestyle-impact/", LifestyleImpactView.as_view(), name="lifestyle_impact"),
+    path("insights/income-demographics/", IncomeDemographicsView.as_view(), name="income_demographics"),
+    path("insights/lifestyle-impact/", LifestyleImpactView.as_view(), name="lifestyle_impact"),
     path("report-creator/", ReportCreatorView.as_view(), name="report_creator"),
     path('api/longitudinal-trends/', LongitudinalTrendsView.as_view(), name='longitudinal_trends_api'),
     path("api/population-test-distribution/", PopulationTestDistributionAPIView.as_view(), name="population_test_distribution_api"),
@@ -33,7 +34,6 @@ urlpatterns = [
     path("api/patient-test-levels/", PatientTestLevelsApiView.as_view(), name="patient_test_levels_api"),
     path("api/demographic-impact/", DemographicImpactApiView.as_view(), name="demographic_impact_api"),
     path("api/test-anomalies/", TestAnomaliesAPIView.as_view(), name="test_anomalies_api"),
-    path("insights/income-demographics/", IncomeDemographicsView.as_view(), name="income_demographics"),
     path('insights/demo/', DemoPageView.as_view(), name='demo_page'),  # Demo filter page
     path('api/demo-filter-results/', DemoFilterResultsView.as_view(), name='demo_filter_results'),  # API for filtering results
     
