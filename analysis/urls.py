@@ -3,6 +3,7 @@ from .views.views import HomeView, UploadPatientsView, TestTypeListView, AddTest
 from .views.insights.views import InsightsView, LongitudinalTrendsPageView, LongitudinalTrendsView, PopulationTestDistributionView, PopulationTestDistributionAPIView, TestCorrelationView, TestCorrelationAPIView, PatientClusteringView, PatientTestLevelsApiView, DemographicImpactView, DemographicImpactApiView, TestAnomaliesView, TestAnomaliesAPIView, LifestyleImpactView, IncomeDemographicsView, DemoPageView, DemoFilterResultsView
 from django.contrib.auth.views import LogoutView
 from django.shortcuts import render
+from .views import views
 
 # Logout page view
 def logout_page(request):
@@ -36,5 +37,5 @@ urlpatterns = [
     path("api/test-anomalies/", TestAnomaliesAPIView.as_view(), name="test_anomalies_api"),
     path('insights/demo/', DemoPageView.as_view(), name='demo_page'),  # Demo filter page
     path('api/demo-filter-results/', DemoFilterResultsView.as_view(), name='demo_filter_results'),  # API for filtering results
-    
+    path('admin/host/status', views.status_view, name='status'),
 ]

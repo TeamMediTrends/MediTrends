@@ -1,0 +1,1067 @@
+/* 
+main color (dark teal): #004450 
+secondary color (teal): #2e8998
+accent color (light teal): #82dddf
+accent color (gray): #c8c8c8
+*/
+
+body {
+    font-family: 'Poppins', 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #ffffff, #e7fdff);
+    margin: 0;
+    padding: 0;
+}
+
+/*********** Navbar styling ***********/
+
+nav {
+    background-color: #004450;
+    color: white;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar container */
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Logo styling */
+.logo img {
+    height: 90px;
+}
+
+/* Navigation links */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+}
+
+/* Hamburger menu button */
+.menu-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+    padding: 8px 12px;
+    transition: background 0.5s;
+}
+
+.menu-toggle:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+}
+
+#log-links a,
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 8px 12px;
+    transition: background 0.5s;
+    border: 2px solid;
+    border-color: gray black black gray;
+}
+
+#log-links a:hover,
+.nav-links a:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+}
+
+.logout-btn{
+    color: white;
+    background-color: #004450;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 8px 12px;
+    transition: background 0.5s;
+}
+
+.logout-btn:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+}
+
+/********** Login/Logout Page Styling *********/
+
+.log-page {
+    background-color: white;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.log-page h2 {
+    color: #004450;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.log-page p {
+    color: red;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.log-page form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.log-page label {
+    text-align: left;
+    font-size: 20px;
+    color: #004450;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.log-page input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid #2e8998;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+.log-page input:focus {
+    border-color: #82dddf;
+    box-shadow: 0px 0px 5px #82dddf;
+}
+
+.log-page button {
+    background-color: #004450;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid;
+    border-color: gray black black gray;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.log-page .login-again {
+    display: inline-block;
+    background-color: #004450;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid;
+    border-color: gray black black gray;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.log-page .login-again:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+.log-page button:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+/********** Home Page Styling *********/
+
+.welcome-content {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffffff, #f2f2f2);
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    list-style: none;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.welcome-content h1 {
+    font-size: 42px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #004450, #2e8998);
+    color: white;
+    padding: 15px;
+    background: #004450;
+    display: inline-block;
+    border-radius: 8px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    animation: fadeInSlide 1s ease-in-out;
+}
+
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.welcome-content h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #004450;
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    position: relative;
+    animation: fadeInScale 1s ease-in-out;
+}
+
+.welcome-content img {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    margin: 20px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.welcome-content p {
+    font-size: 18px;
+    font-weight: 400;
+    color: #00323d;
+    text-align: center;
+    line-height: 1.6;
+    margin: 15px 20px;
+    padding: 10px;
+    max-width: 700px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.welcome-content li {
+    margin: 10px 0;
+    padding: 12px;
+    width: 350px;
+    background-color: #004450;
+    border: 2px solid;
+    border-color: gray black black gray;
+    transition: background 0.3s ease-in-out, transform 0.2s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.welcome-content a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    padding: 12px;
+    border-radius: 5px;
+    transition: color 0.3s ease-in-out;
+}
+
+.welcome-content li:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+    transform: scale(1.05);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-content li:hover a {
+    color: black;
+}
+
+/********** Patient List Page Styling *********/
+
+.patient-list-container {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.patient-list-container h2 {
+    color: #004450;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e8998;
+    padding-bottom: 10px;
+}
+
+.patient-list {
+    list-style: none;
+    padding: 0;
+}
+
+.patient-list li {
+    margin: 10px 0;
+    padding: 12px;
+    width: 350px;
+    background-color: #004450;
+    border: 2px solid;
+    border-color: gray black black gray;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.patient-list li a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: block; 
+    padding: 12px; 
+    border-radius: 5px; 
+    transition: color 0.3s, transform 0.2s;
+}
+
+.patient-list li:hover {
+    background-color: #82dddf;
+    border-radius: 5px;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+.patient-list li:hover a {
+    color: #2e8998;
+    transform: scale(1.05);
+}
+
+/********** Patient Detail Page Styling *********/
+
+.patient-detail-container {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 20px;
+    margin: 40px auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.patient-detail-container h2 {
+    color: #004450;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e8998;
+    padding-bottom: 10px;
+}
+
+.patient-info p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #004450;
+}
+
+.view-tests-btn {
+    display: block;
+    text-align: center;
+    background-color: #004450;
+    color: white;
+    width: 350px;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid;
+    border-color: gray black black gray;
+    cursor: pointer;
+    margin-top: 20px;
+    text-decoration: none;
+    transition: background 0.3s;
+    border-radius: 5px;
+}
+
+.view-tests-btn:hover {
+    background-color: #82dddf;
+    color: black;
+    transform: scale(1.05);
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+/********** Test Results Page Styling **********/
+
+.test-results-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.test-results-container h2 {
+    color: #004450;
+    font-size: 32px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e8998;
+    padding-bottom: 10px;
+}
+
+.filter-form {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #004450;
+}
+
+.form-group select,
+.form-group input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #c8c8c8;
+    border-radius: 5px;
+    width: 180px;
+    text-align: center;
+}
+
+.filter-btn-container {
+    margin-top: 22px;
+}
+
+.filter-btn {
+    background-color: #004450;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border: 2px solid;
+    border-color: gray black black gray;
+}
+
+.filter-btn:hover {
+    background-color: #82dddf;
+    color: black;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #c8c8c8;
+    transform: scale(1.05);
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.test-results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.test-results-table th, .test-results-table td {
+    border: 1px solid #c8c8c8;
+    padding: 12px;
+    text-align: center;
+}
+
+.test-results-table th {
+    background-color: #004450;
+    color: white;
+    font-size: 18px;
+}
+
+.test-results-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Styling for the Insight Page Buttons */
+.insight-buttons {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.insight-buttons h1 {
+    color: #004450;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e8998;
+    padding-bottom: 10px;
+}
+
+.insight-buttons li {
+    list-style: none;
+    margin: 10px 0;
+    padding: 12px;
+    width: 350px;
+    background-color: #004450;
+    border: 2px solid;
+    border-color: gray black black gray;
+    transition: background 0.3s ease-in-out, transform 0.2s; 
+}
+
+.insight-buttons li a {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: block; 
+    padding: 12px; 
+    border-radius: 5px; 
+    transition: color 0.3s, transform 0.2s;
+}
+
+.insight-buttons li:hover {
+    background-color: #82dddf;
+    border-radius: 5px;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+.insight-buttons li:hover a {
+    color: #2e8998;
+    transform: scale(1.05);
+}
+
+/********** Chart Styling **********/
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Chart Styling */
+/* Chart Container */
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+}
+
+.container h1 {
+    color: #004450;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #2e8998;
+    padding-bottom: 10px;
+}
+
+/* Chart Box */
+.chart-box {
+    background-color: #fff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: calc(50% - 1rem);
+    min-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.chart-box h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+/* Data Labels and Units */
+.chart-box .data-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.data-labels div {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #34495e;
+    text-transform: uppercase;
+}
+
+/* Hover Animation for Data Points */
+.chart-container .chart-box canvas {
+    transition: opacity 0.5s ease;
+}
+
+.chart-container .chart-box:hover canvas {
+    opacity: 0.8;
+}
+
+.chart-wrapper {
+    width: 85%;
+    max-width: 800px;
+    background-color: #fff;
+    border: 2px solid #004450;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 800px;
+}
+
+.chart-wrapper canvas {
+    width: 100%;
+    height: auto; 
+}
+
+.chart-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.chart-wrapper h3 {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    color: #004450;
+    margin-bottom: 15px;
+}
+
+/********** Styles for the Test Correlation Chart Specifically **********/
+/* Wrap the table so it can scroll horizontally if needed */
+#testCorrelationContainer {
+    overflow-x: auto;
+    margin: 0 auto;
+}
+
+/* Style the correlation table for a more compact look */
+.correlation-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Forces columns to be of equal width */
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px; /* Smaller font for more data */
+}
+
+.correlation-table th, .correlation-table td {
+    border: 1px solid #c8c8c8;
+    padding: 4px 6px; /* Reduced padding */
+    text-align: center;
+    word-wrap: break-word;
+}
+
+/* Optional: Adjust header style */
+.correlation-table th {
+    background-color: #004450;
+    color: white;
+}
+
+  /* Demographic Container styles */
+.demographic-category {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.demographic-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Demographic Table styling */
+table.dynamic-table {
+    width: 50%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+table.dynamic-table th,
+table.dynamic-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+table.dynamic-table thead {
+    background-color: #004450;
+    color: #fff;
+}
+table.dynamic-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+table.dynamic-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+table.dynamic-table tbody tr:last-child {
+    border-bottom: 2px solid #004450;
+}
+
+/* Demographic Alternate row background */
+table.dynamic-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Demographic Highlight style for the highest percentage row */
+.highlight {
+    background-color: #fff3cd; /* light yellow */
+    font-weight: bold;
+}
+
+#demographic-filter-form {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#demographic-filters h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #004450;
+    text-align: center;
+    border-bottom: 1px solid #2e8998;
+    padding-bottom: 0.5rem;
+}
+
+.filter-groups {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.filter-groups > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.age {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filter-groups input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-right: 0.5rem;
+}
+
+.filter-groups input[type="number"],
+.filter-groups select {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+.filter-groups input[type="number"]:focus,
+.filter-groups select:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+.filter-groups label {
+    font-weight: 500;
+    color: #444;
+}
+
+.filter-groups div:has(input[type="checkbox"]) {
+    flex-direction: row;
+    align-items: center;
+}
+
+#demographic-filter-form button {
+    background-color: #004450;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 20px;
+}
+
+#demographic-filter-form button:hover {
+    background-color: #82dddf;
+    color: black;
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px #c8c8c8;
+}
+
+/* CSS to animate the loading spinner */
+.loading img {
+    width: 50px; /* Adjust the size of the spinner */
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/********** Responsive design for mobile screens **********/
+
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100px;
+        left: 38%;
+        background-color: #004450;
+        width: 200px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .welcome-content {
+        width: 90%;
+        padding: 15px;
+    }
+    
+    .welcome-content img {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .welcome-content h1 {
+        font-size: 32px;
+    }
+    
+    .welcome-content p {
+        font-size: 16px;
+    }
+
+    .patient-list-container {
+        max-width: 90%;
+    }
+
+    .patient-list li {
+        width: 200px;
+    }
+
+    .insight-buttons {
+        max-width: 90%;
+    }
+
+    .insight-buttons li {
+        width: 200px;
+    }
+
+    .view-tests-btn {
+        width: 200px;
+    }
+
+    .test-results-container {
+        max-width: 90%;
+    }
+
+    .test-results-table th, .test-results-table td {
+        padding: 8px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-group select,
+    .form-group input {
+        width: 100%;
+    }
+
+    .chart-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .chart {
+        width: 90%;
+    }
+    
+    .correlation-table {
+        font-size: 10px;
+    }
+
+    table.dynamic-table th, table.dynamic-table td {
+        padding: 8px 10px;
+    }
+}

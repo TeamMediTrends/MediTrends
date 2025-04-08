@@ -6,7 +6,10 @@ from django.urls import reverse_lazy
 import pandas as pd
 from ..forms import UploadFileForm, TestTypeForm, TestFilterForm
 from ..models import Patient, TestType, PatientTest
+from django.http import HttpResponse
 
+def status_view(request):
+    return HttpResponse("OK", status=200)
 
 class HomeView(TemplateView):
     """Home page view"""

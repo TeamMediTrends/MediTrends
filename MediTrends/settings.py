@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pkw1)+k6zm1c%@kk3rz59+c1!+txsmglwr=phl*#bvu6z-p=lr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['meditrenz.azurewebsites.net', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'MediTrends.urls'
@@ -118,9 +119,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",  # This includes your static folder in the project root
-]
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",  # This includes your static folder in the project root
+    ]
+    
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -130,3 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Authentication settings
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'logout_page'
+
+CSRF_TRUSTED_ORIGINS = ['https://meditrenz.azurewebsites.net']
+CSRF_COOKIE_SECURE = True  # Set to True in production, False for local development with HTTP
+CSRF_COOKIE_HTTPONLY = True
