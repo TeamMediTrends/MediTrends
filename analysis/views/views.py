@@ -28,7 +28,6 @@ class UploadPatientsView(LoginRequiredMixin, AdminRequiredMixin, FormView):
         excel_file = self.request.FILES["file"]
         try:
             df = pd.read_excel(excel_file, engine="openpyxl")
-            print("DataFrame head:\n", df.head())
 
 
             patients = [
@@ -60,7 +59,6 @@ class UploadPatientsView(LoginRequiredMixin, AdminRequiredMixin, FormView):
             return super().form_valid(form)
 
         except Exception as e:
-            print("Error processing the file:", e)
             return self.form_invalid(form) 
 
     def get_context_data(self, **kwargs):

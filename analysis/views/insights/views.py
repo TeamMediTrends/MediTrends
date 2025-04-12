@@ -100,7 +100,6 @@ class DemoPageView(TemplateView):
 class DemoFilterResultsView(View):
     def get(self, request):
         filters = json.loads(request.GET.get("filters", "{}"))
-        print("🔍 Received Filters:", filters)  # Debugging
 
         queryset = PatientTest.objects.all()
 

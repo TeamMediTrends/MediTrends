@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Page loaded. Fetching test data...");
+     ("Page loaded. Fetching test data...");
 
     // Fetch the test data from the API
     fetch("/api/patient-test-levels/")
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function createTestScatterPlots(testData) {
-    console.log("Test Data:", testData); // Debugging
+     ("Test Data:", testData); // Debugging
 
     const container = document.getElementById("test-chart");
     container.innerHTML = ""; // Clear previous charts if any

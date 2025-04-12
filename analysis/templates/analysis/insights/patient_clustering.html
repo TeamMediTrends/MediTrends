@@ -1,10 +1,13 @@
-{% extends "base.html" %}
-
-{% block content %}
-{% load static %}
+{% extends "base.html" %} {% block content %} {% load static %}
 
 <div class="container">
-    <h1>Patient Test Clustering</h1>
+    <h1>Patient Test Grouping</h1>
+
+    <!-- Loading Icon (Initially hidden) -->
+    <div id="loading-icon" class="loading" style="display: none">
+        Loading...
+    </div>
+
     <div id="test-chart" class="chart-container"></div>
 </div>
 

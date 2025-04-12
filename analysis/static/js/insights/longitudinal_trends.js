@@ -1,21 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Page loaded. Fetching data...");
+
+    // Show loading icon
+    const loadingIcon = document.getElementById("loading-icon");
+    loadingIcon.style.display = "block"; // Show loading icon
+
     fetch("/api/longitudinal-trends/")
         .then((response) => response.json())
         .then((data) => {
-            console.log("Fetched data:", data);
+
+            // Hide loading icon after data is successfully fetched
+            loadingIcon.style.display = "none";
+
             createCharts(data);
         })
-        .catch((error) => console.error("Error fetching data:", error));
+        .catch((error) => {
+            console.error("Error fetching data:", error);
+
+            // Hide loading icon in case of an error
+            loadingIcon.style.display = "none";
+        });
 });
 
 function createCharts(data) {
-
     const container = document.getElementById("longitudinalTrendsCharts");
     container.innerHTML = ""; // Clear previous charts if any
 
     const testTypes = Object.keys(data);
-    console.log("Test Types:", testTypes);
 
     testTypes.forEach((testType) => {
         // Create a new div and canvas for each test type

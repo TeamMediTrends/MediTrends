@@ -1,17 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Correlation Analysis page loaded. Fetching data...");
+    // Show loading icon
+    const loadingIcon = document.getElementById("loading-icon");
+    loadingIcon.style.display = "block"; // Show loading icon
+
     fetch("/api/test-correlation/")
-        .then(response => response.json())
-        .then(data => {
-            console.log("Fetched correlation data:", data);
+        .then((response) => response.json())
+        .then((data) => {
             createCorrelationTable(data);
+            // Hide loading icon after data is successfully fetched
+            loadingIcon.style.display = "none";
         })
-        .catch(error => console.error("Error fetching correlation data:", error));
+        .catch((error) => {
+            console.error("Error fetching test data:", error);
+
+            // Hide loading icon in case of an error
+            loadingIcon.style.display = "none";
+        });
 });
 
 function createCorrelationTable(data) {
     const container = document.getElementById("testCorrelationContainer");
-    container.innerHTML = "";  // Clear previous content
+    container.innerHTML = ""; // Clear previous content
 
     // Extract test types (i.e., column names in the correlation matrix)
     const testTypes = Object.keys(data);
@@ -24,7 +33,7 @@ function createCorrelationTable(data) {
     const headerRow = document.createElement("tr");
     const emptyCell = document.createElement("th");
     headerRow.appendChild(emptyCell); // top-left empty cell
-    testTypes.forEach(test => {
+    testTypes.forEach((test) => {
         const th = document.createElement("th");
         th.textContent = test;
         headerRow.appendChild(th);
@@ -32,17 +41,17 @@ function createCorrelationTable(data) {
     table.appendChild(headerRow);
 
     // Create table rows for each test type
-    testTypes.forEach(rowTest => {
+    testTypes.forEach((rowTest) => {
         const row = document.createElement("tr");
         const rowHeader = document.createElement("th");
         rowHeader.textContent = rowTest;
         row.appendChild(rowHeader);
 
-        testTypes.forEach(colTest => {
+        testTypes.forEach((colTest) => {
             const cell = document.createElement("td");
             const value = data[rowTest][colTest];
             // Format the correlation value to two decimals
-            const formatted = (value !== undefined ? value.toFixed(2) : "N/A");
+            const formatted = value !== undefined ? value.toFixed(2) : "N/A";
             cell.textContent = formatted;
             // Color-code the cell based on correlation strength and sign
             if (value >= 0) {
@@ -51,7 +60,10 @@ function createCorrelationTable(data) {
                 cell.style.backgroundColor = `rgb(${intensity}, 255, ${intensity})`;
             } else {
                 // Negative correlation: shades of red
-                const intensity = Math.min(255, Math.floor(255 - Math.abs(value) * 100));
+                const intensity = Math.min(
+                    255,
+                    Math.floor(255 - Math.abs(value) * 100)
+                );
                 cell.style.backgroundColor = `rgb(255, ${intensity}, ${intensity})`;
             }
             row.appendChild(cell);

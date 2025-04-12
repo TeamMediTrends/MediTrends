@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Population Test Distribution page loaded. Fetching data...");
+     ("Population Test Distribution page loaded. Fetching data...");
     fetch("/api/population-test-distribution/")
     .then(response => response.json())
     .then(data => {
-        console.log("Fetched distribution data:", data);
+         ("Fetched distribution data:", data);
         createDistributionCharts(data);
     })
     .catch(error => console.error("Error fetching distribution data:", error));

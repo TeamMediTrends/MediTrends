@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Page loaded. Fetching data...");
+     ("Page loaded. Fetching data...");
     fetch("/api/longitudinal-trends/")
         .then((response) => response.json())
         .then((data) => {
-            console.log("Fetched data:", data);
+             ("Fetched data:", data);
             createCharts(data);
         })
         .catch((error) => console.error("Error fetching data:", error));
@@ -15,7 +15,7 @@ function createCharts(data) {
     container.innerHTML = ""; // Clear previous charts if any
 
     const testTypes = Object.keys(data);
-    console.log("Test Types:", testTypes);
+     ("Test Types:", testTypes);
 
     testTypes.forEach((testType) => {
         // Create a new div and canvas for each test type

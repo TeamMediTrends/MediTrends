@@ -55,22 +55,20 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        console.log("Filters being sent:", filters);
 
         const apiUrl = `/api/demographic-impact/?filters=${encodeURIComponent(
             JSON.stringify(filters)
         )}`;
-        console.log("API Request URL:", apiUrl);
 
         // Show loading icon
         const loadingIcon = document.getElementById("loading-icon");
         loadingIcon.style.display = "block";  // Show loading icon
+        
         resultsContainer.innerHTML = ""; // Clear previous results
 
         fetch(apiUrl)
             .then((response) => response.json())
             .then((data) => {
-                console.log("API Response:", data);
 
                 // Update chart with test_data
                 createCharts(data);
@@ -108,7 +106,6 @@ function createCharts(data) {
     });
 
     const testTypes = Object.keys(groupedByTest);
-    console.log("Test Types:", testTypes);
 
     testTypes.forEach((testType) => {
         const chartDiv = document.createElement("div");

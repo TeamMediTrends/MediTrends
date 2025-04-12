@@ -956,9 +956,11 @@ table.dynamic-table tbody tr:nth-child(even) {
 }
 
 /* CSS to animate the loading spinner */
-.loading img {
-    width: 50px; /* Adjust the size of the spinner */
+.loading {
+    width: 100px;
     animation: spin 1s linear infinite;
+    margin: 0 auto;
+    text-align: center;
 }
 
 @keyframes spin {

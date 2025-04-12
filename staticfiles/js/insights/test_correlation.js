@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Correlation Analysis page loaded. Fetching data...");
+     ("Correlation Analysis page loaded. Fetching data...");
     fetch("/api/test-correlation/")
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched correlation data:", data);
+             ("Fetched correlation data:", data);
             createCorrelationTable(data);
         })
         .catch(error => console.error("Error fetching correlation data:", error));

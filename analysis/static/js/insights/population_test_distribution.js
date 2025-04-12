@@ -1,20 +1,33 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Population Test Distribution page loaded. Fetching data...");
+
+    // Show loading icon
+    const loadingIcon = document.getElementById("loading-icon");
+    loadingIcon.style.display = "block"; // Show loading icon
+
     fetch("/api/population-test-distribution/")
-    .then(response => response.json())
-    .then(data => {
-        console.log("Fetched distribution data:", data);
-        createDistributionCharts(data);
-    })
-    .catch(error => console.error("Error fetching distribution data:", error));
+        .then((response) => response.json())
+        .then((data) => {
+            createDistributionCharts(data);
+
+            // Hide loading icon after data is successfully fetched
+            loadingIcon.style.display = "none";
+        })
+        .catch((error) => {
+            console.error("Error fetching distribution data:", error);
+
+            // Hide loading icon in case of an error
+            loadingIcon.style.display = "none";
+        });
 });
 
 function createDistributionCharts(data) {
-    const container = document.getElementById("populationTestDistributionCharts");
+    const container = document.getElementById(
+        "populationTestDistributionCharts"
+    );
     container.innerHTML = ""; // Clear any existing content
 
     const testTypes = Object.keys(data);
-    testTypes.forEach(testType => {
+    testTypes.forEach((testType) => {
         // Create a wrapper for each chart
         const chartWrapper = document.createElement("div");
         chartWrapper.classList.add("chart-wrapper");
@@ -39,69 +52,79 @@ function createDistributionCharts(data) {
             type: "bar",
             data: {
                 labels: labels,
-                datasets: [{
-                    label: "Frequency",
-                    data: counts,
-                    backgroundColor: "rgba(46, 137, 152, 0.6)", // secondary teal with some transparency
-                    borderColor: "#004450", // main dark teal
-                    borderWidth: 1
-                }]
+                datasets: [
+                    {
+                        label: "Frequency",
+                        data: counts,
+                        backgroundColor: "rgba(46, 137, 152, 0.6)", // secondary teal with some transparency
+                        borderColor: "#004450", // main dark teal
+                        borderWidth: 1,
+                    },
+                ],
             },
             options: {
                 responsive: true,
                 plugins: {
                     legend: {
-                        display: false // Hide legend if only one dataset
+                        display: false, // Hide legend if only one dataset
                     },
                     title: {
                         display: true,
                         text: `Distribution of ${testType} Results`,
                         font: {
-                            family: 'Poppins',
+                            family: "Poppins",
                             size: 16,
-                            weight: 'bold'
+                            weight: "bold",
                         },
-                        color: "#004450"
+                        color: "#004450",
                     },
                     tooltip: {
                         backgroundColor: "#82dddf",
                         titleColor: "#004450",
-                        bodyColor: "#004450"
-                    }
+                        bodyColor: "#004450",
+                    },
                 },
                 scales: {
                     x: {
                         title: {
                             display: true,
                             text: "Result Range",
-                            font: { family: 'Poppins', size: 14, weight: 'bold' },
-                            color: "#004450"
+                            font: {
+                                family: "Poppins",
+                                size: 14,
+                                weight: "bold",
+                            },
+                            color: "#004450",
                         },
                         ticks: {
-                            font: { family: 'Poppins' },
-                            color: "#004450"
+                            font: { family: "Poppins" },
+                            color: "#004450",
                         },
                         grid: {
-                            color: "#c8c8c8"
-                        }
+                            color: "#c8c8c8",
+                        },
                     },
                     y: {
                         title: {
                             display: true,
                             text: "Frequency (# of Tests in Range)",
-                            font: { family: 'Poppins', size: 14, weight: 'bold' },
-                            color: "#004450"
+                            font: {
+                                family: "Poppins",
+                                size: 14,
+                                weight: "bold",
+                            },
+                            color: "#004450",
                         },
                         ticks: {
-                            font: { family: 'Poppins' },
-                            color: "#004450"
+                            font: { family: "Poppins" },
+                            color: "#004450",
                         },
                         grid: {
-                            color: "#c8c8c8"
-                        }
-                    }
-                }
-            }
+                            color: "#c8c8c8",
+                        },
+                    },
+                },
+            },
         });
     });
 }

@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("Page loaded. Fetching test data...");
 
-    // Fetch the test data from the API
+    // Show loading icon
+    const loadingIcon = document.getElementById("loading-icon");
+    loadingIcon.style.display = "block"; // Show loading icon
+
     fetch("/api/patient-test-levels/")
         .then((response) => response.json())
         .then((data) => {
@@ -10,14 +12,19 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 console.error("Error: No test data in the response.");
             }
+
+            // Hide loading icon after data is successfully fetched
+            loadingIcon.style.display = "none";
         })
         .catch((error) => {
             console.error("Error fetching test data:", error);
+
+            // Hide loading icon in case of an error
+            loadingIcon.style.display = "none";
         });
 });
 
 function createTestScatterPlots(testData) {
-    console.log("Test Data:", testData); // Debugging
 
     const container = document.getElementById("test-chart");
     container.innerHTML = ""; // Clear previous charts if any
@@ -39,14 +46,17 @@ function createTestScatterPlots(testData) {
         container.appendChild(chartDiv);
 
         // Create labels (patient IDs or custom labels based on data structure)
-        const labels = Array.from({ length: test.levels.length }, (_, i) => `Patient ${i + 1}`);
+        const labels = Array.from(
+            { length: test.levels.length },
+            (_, i) => `Patient ${i + 1}`
+        );
 
         // Create dataset for this test (scatter plot)
         const dataset = {
             label: test.test_name,
             data: test.levels.map((level, index) => ({
-                x: index + 1,  // Use patient index for x-axis
-                y: level,      // Test level for y-axis
+                x: index + 1, // Use patient index for x-axis
+                y: level, // Test level for y-axis
             })),
             backgroundColor: "#2e8998",
             borderColor: "#2e8998",
@@ -58,14 +68,14 @@ function createTestScatterPlots(testData) {
         new Chart(canvas, {
             type: "scatter",
             data: {
-                labels, 
+                labels,
                 datasets: [dataset],
             },
             options: {
                 responsive: true,
                 plugins: {
-                    legend: { 
-                        display: false,  // Hide the legend
+                    legend: {
+                        display: false, // Hide the legend
                     },
                     tooltip: {
                         callbacks: {
@@ -88,7 +98,7 @@ function createTestScatterPlots(testData) {
                 scales: {
                     x: {
                         title: {
-                            display: false, 
+                            display: false,
                         },
                         ticks: {
                             display: false,

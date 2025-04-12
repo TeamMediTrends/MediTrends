@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetch("/api/test-anomalies/")
         .then(response => response.json())
         .then(data => {
-            console.log("Fetched anomalies:", data);
+             ("Fetched anomalies:", data);
             createHeatmap(data);
             createScatterPlot(data);
             createBoxPlot(data);
