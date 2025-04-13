@@ -46,7 +46,7 @@ By developing MediTrends, we strive to prove to research teams that we can prese
 
 ### **Where?**
 - **Development**: VS Code, Python, Django.
-- **Deployment**: Cloud-based Django web application accessible via browser.
+- **Deployment**: (https://meditrenz.azurewebsites.net/)
 
 ### **How?**
 - **Database**: SQLite for storing patient data.
