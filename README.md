@@ -30,7 +30,7 @@ Users can either search for specific trends or explore trends within defined cat
 ## 5. Description
 
 ### **Video Demo**
-https://youtu.be/laUqr_pVyyc ![image](https://github.com/user-attachments/assets/75a3db15-d200-47c2-aaaf-aea9101ab4e4)
+https://youtu.be/laUqr_pVyyc 
 
 ### **Why?**
 We aim to showcase our ability to transform complex medical data into **meaningful insights** for healthcare professionals.  
